@@ -1,0 +1,13 @@
+{
+  "nav": { "home":"الرئيسية", "products":"المنتجات", "categories":"الفئات", "deals":"العروض", "sellers":"البائعون", "blog":"المدونة", "login":"تسجيل الدخول", "signup":"إنشاء حساب", "account":"الحساب", "orders":"الطلبات", "wishlist":"قائمة الأمنيات", "wallet":"المحفظة", "logout":"تسجيل الخروج", "dashboard":"لوحة التحكم", "admin":"الإدارة" },
+  "hero": { "title":"سوقك الشامل للمنتجات الزراعية الطازجة والأساسية", "subtitle":"تسوق المنتجات الطازجة والحبوب ومستلزمات الزراعة — توصيل سريع إلى بابك.", "shopNow":"تسوق الآن", "browseCategories":"تصفح الفئات" },
+  "product": { "addToCart":"أضف إلى السلة", "buyNow":"اشتر الآن", "inStock":"متوفر", "outOfStock":"نفد المخزون", "reviews":"التقييمات", "description":"الوصف", "seller":"البائع", "similar":"منتجات مشابهة", "organic":"عضوي", "unit":"الوحدة", "minOrder":"الحد الأدنى للطلب" },
+  "cart": { "title":"سلتي", "empty":"سلتك فارغة", "subtotal":"المجموع الفرعي", "delivery":"التوصيل", "total":"الإجمالي", "checkout":"إتمام الشراء", "continueShopping":"مواصلة التسوق", "free":"مجاني", "remove":"إزالة", "promoCode":"رمز الخصم", "apply":"تطبيق" },
+  "checkout": { "title":"الدفع", "delivery":"عنوان التوصيل", "payment":"طريقة الدفع", "summary":"ملخص الطلب", "placeOrder":"تأكيد الطلب", "processing":"جاري المعالجة..." },
+  "order": { "placed":"تم تقديم الطلب", "confirmed":"مؤكد", "processing":"قيد المعالجة", "shipped":"تم الشحن", "outForDelivery":"في الطريق", "delivered":"تم التوصيل", "cancelled":"ملغى", "refunded":"مسترد", "trackOrder":"تتبع الطلب", "reorder":"إعادة الطلب" },
+  "auth": { "login":"تسجيل الدخول", "register":"إنشاء حساب", "email":"البريد الإلكتروني", "phone":"رقم الهاتف", "password":"كلمة المرور", "forgotPassword":"نسيت كلمة المرور؟", "noAccount":"ليس لديك حساب؟", "hasAccount":"لديك حساب بالفعل؟", "orContinueWith":"أو تابع مع", "google":"جوجل", "facebook":"فيسبوك" },
+  "account": { "profile":"ملفي الشخصي", "orders":"طلباتي", "wishlist":"قائمة الأمنيات", "wallet":"المحفظة", "refunds":"المبالغ المستردة", "addresses":"العناوين", "settings":"الإعدادات", "loyaltyPoints":"نقاط الولاء" },
+  "common": { "loading":"جاري التحميل...", "error":"حدث خطأ ما", "retry":"حاول مجدداً", "save":"حفظ", "cancel":"إلغاء", "delete":"حذف", "edit":"تعديل", "view":"عرض", "search":"بحث", "filter":"تصفية", "sort":"ترتيب", "all":"الكل", "seeAll":"عرض الكل", "back":"رجوع", "next":"التالي", "previous":"السابق", "submit":"إرسال", "confirm":"تأكيد", "close":"إغلاق" },
+  "currency": { "USD":"دولار", "ETB":"بر إثيوبي", "KES":"شلن كيني" },
+  "payment": { "mpesa":"M-Pesa", "card":"بطاقة ائتمان/خصم", "chapa":"Chapa", "telebirr":"TeleBirr", "cbeBirr":"CBE Birr", "cod":"الدفع عند الاستلام", "pod":"الدفع عند الاستلام", "bankTransfer":"تحويل بنكي", "wallet":"رصيد المحفظة" }
+}

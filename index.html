@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hafa Market – Fresh Agricultural Products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="ai-assistant.css" />
+  <link rel="stylesheet" href="live-support.css" />
+</head>
+<body>
+
+<!-- ========== ANNOUNCEMENT BAR ========== -->
+<div class="announce-bar" id="announceBar">
+  <div class="announce-inner">
+    <span>🎉 Welcome to Hafa Market! Free delivery on orders over $50 — Use code <strong>HAFA10</strong> for 10% off your first order</span>
+    <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'">×</button>
+  </div>
+</div>
+
+<!-- ========== HEADER ========== -->
+<header class="header" id="header">
+  <div class="header-main">
+    <div class="container header-inner">
+
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <span>🌿</span>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Hafa <em>Market</em></span>
+          <span class="logo-tagline">Farm Fresh Delivered</span>
+        </div>
+      </a>
+
+      <!-- Search -->
+      <div class="search-wrap">
+        <div class="search-bar" id="searchBar">
+          <select class="search-cat" id="searchCat">
+            <option value="">All Categories</option>
+            <optgroup label="🌿 Fresh Produce">
+              <option value="vegetables">Vegetables</option>
+              <option value="fruits">Fruits</option>
+            </optgroup>
+            <optgroup label="🌾 Grains, Legumes & Spices">
+              <option value="grains">Grains</option>
+              <option value="legumes">Legumes</option>
+              <option value="spices">Spices & Herbs</option>
+            </optgroup>
+            <optgroup label="🥚 Poultry, Dairy & Meat">
+              <option value="poultry">Poultry & Dairy</option>
+              <option value="meat">Livestock & Meat</option>
+            </optgroup>
+            <optgroup label="☕ Coffee & Beverages">
+              <option value="coffee">Coffee & Beverages</option>
+            </optgroup>
+            <optgroup label="⭐ Specialty & Processed">
+              <option value="specialty">Specialty Products</option>
+              <option value="processed">Processed & Ready Foods</option>
+            </optgroup>
+            <optgroup label="🏠 Household & Services">
+              <option value="household">Household & Essentials</option>
+              <option value="services">Services (አገልግሎት)</option>
+            </optgroup>
+          </select>
+          <input type="text" id="searchInput" placeholder="Search products, brands, farmers..." autocomplete="off" oninput="liveSearch(this.value)" onfocus="showSearchDrop()" />
+          <button class="search-btn" onclick="doSearch()"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+
+      <!-- Header Right -->
+      <div class="header-right">
+        <div class="header-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <span class="loc-label">Deliver to</span>
+            <span class="loc-val">Nairobi, KE</span>
+          </div>
+        </div>
+        <div class="header-account" onclick="openModal('loginModal')">
+          <i class="fas fa-user-circle"></i>
+          <div>
+            <span class="acc-label">Hello, Sign in</span>
+            <span class="acc-val">Account & Orders</span>
+          </div>
+        </div>
+        <button class="wishlist-btn" onclick="toggleWishlistPanel()">
+          <i class="fas fa-heart"></i>
+          <span class="wish-count" id="wishCount">0</span>
+        </button>
+        <button class="cart-btn" onclick="toggleCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+          <span class="cart-label">Cart</span>
+        </button>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav Bar -->
+  <nav class="nav-bar" id="navBar">
+    <div class="container nav-inner">
+      <div class="nav-all-cats" onclick="toggleMegaMenu()">
+        <i class="fas fa-th"></i> All Categories <i class="fas fa-chevron-down"></i>
+      </div>
+      <a href="#featured" onclick="filterCategory('vegetables')">🥬 Fresh Produce</a>
+      <a href="#featured" onclick="filterCategory('grains')">🌾 Grains & Legumes</a>
+      <a href="#featured" onclick="filterCategory('poultry')">🥚 Poultry & Dairy</a>
+      <a href="#featured" onclick="filterCategory('coffee')">☕ Coffee</a>
+      <a href="#featured" onclick="filterCategory('specialty')">⭐ Specialty</a>
+      <a href="#deals" class="nav-deal">🔥 Today's Deals</a>
+      <a href="#sellers">Top Sellers</a>
+      <a href="#blog">Farm Blog</a>
+      <a href="#why-us" class="nav-highlight">New Arrivals ✨</a>
+    </div>
+    <!-- Mega Menu -->
+    <div class="mega-menu" id="megaMenu">
+      <div class="container mega-inner">
+        <div class="mega-col">
+          <h4>🥬 Vegetables</h4>
+          <a href="#" onclick="filterCategory('vegetables')">Tomatoes</a>
+          <a href="#" onclick="filterCategory('vegetables')">Onions</a>
+          <a href="#" onclick="filterCategory('vegetables')">Cabbage</a>
+          <a href="#" onclick="filterCategory('vegetables')">Carrots</a>
+          <a href="#" onclick="filterCategory('vegetables')">Potatoes</a>
+          <a href="#" onclick="filterCategory('vegetables')">Peppers</a>
+          <a href="#" onclick="filterCategory('vegetables')">Spinach & Kale</a>
+          <a href="#" onclick="filterCategory('vegetables')">Garlic</a>
+        </div>
+        <div class="mega-col">
+          <h4>� Fruits</h4>
+          <a href="#" onclick="filterCategory('fruits')">Avocado</a>
+          <a href="#" onclick="filterCategory('fruits')">Banana</a>
+          <a href="#" onclick="filterCategory('fruits')">Mango</a>
+          <a href="#" onclick="filterCategory('fruits')">Papaya</a>
+          <a href="#" onclick="filterCategory('fruits')">Pineapple</a>
+          <a href="#" onclick="filterCategory('fruits')">Orange & Lemon</a>
+          <a href="#" onclick="filterCategory('fruits')">Watermelon</a>
+          <a href="#" onclick="filterCategory('fruits')">Guava & Grapes</a>
+        </div>
+        <div class="mega-col">
+          <h4>🌾 Grains & Legumes</h4>
+          <a href="#" onclick="filterCategory('grains')">Teff</a>
+          <a href="#" onclick="filterCategory('grains')">Wheat</a>
+          <a href="#" onclick="filterCategory('grains')">Maize</a>
+          <a href="#" onclick="filterCategory('grains')">Barley & Sorghum</a>
+          <a href="#" onclick="filterCategory('legumes')">Beans & Lentils</a>
+          <a href="#" onclick="filterCategory('legumes')">Chickpeas & Peas</a>
+          <a href="#" onclick="filterCategory('legumes')">Soybeans</a>
+          <a href="#" onclick="filterCategory('spices')">Spices & Herbs</a>
+        </div>
+        <div class="mega-col">
+          <h4>🥚 Poultry, Dairy & Meat</h4>
+          <a href="#" onclick="filterCategory('poultry')">Eggs</a>
+          <a href="#" onclick="filterCategory('poultry')">Milk</a>
+          <a href="#" onclick="filterCategory('poultry')">Chicken</a>
+          <a href="#" onclick="filterCategory('meat')">Beef & Mutton</a>
+          <a href="#" onclick="filterCategory('meat')">Goat Meat</a>
+          <h4 style="margin-top:12px">☕ Coffee & Beverages</h4>
+          <a href="#" onclick="filterCategory('coffee')">Roasted Coffee</a>
+          <a href="#" onclick="filterCategory('coffee')">Raw Coffee</a>
+        </div>
+        <div class="mega-col">
+          <h4>⭐ Specialty Products</h4>
+          <a href="#" onclick="filterCategory('specialty')">Honey</a>
+          <a href="#" onclick="filterCategory('specialty')">Moringa</a>
+          <a href="#" onclick="filterCategory('specialty')">Aloe Vera</a>
+          <h4 style="margin-top:12px">🍲 Processed Foods</h4>
+          <a href="#" onclick="filterCategory('processed')">ዶሮ ወጥ (Doro Wot)</a>
+          <a href="#" onclick="filterCategory('processed')">Processed Chicken</a>
+          <a href="#" onclick="filterCategory('processed')">Snacks</a>
+          <h4 style="margin-top:12px">🏠 Household & Services</h4>
+          <a href="#" onclick="filterCategory('household')">Cleaning Products</a>
+          <a href="#" onclick="filterCategory('services')">Delivery & Logistics</a>
+        </div>
+        <div class="mega-promo">
+          <div class="mega-promo-card">
+            <span>🎁</span>
+            <strong>Seasonal Deals</strong>
+            <p>Up to 40% off on selected items</p>
+            <a href="#deals" class="btn-sm-green">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+    <div class="hero-particles" id="particles"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge animate-fade-up">
+        <span class="badge-dot"></span> Trusted by 50,000+ Farmers & Buyers Across Africa
+      </div>
+      <h1 class="animate-fade-up delay-1">
+        Your One-Stop Marketplace for
+        <span class="hero-highlight">Fresh & Essential</span>
+        Agricultural Products
+      </h1>
+      <p class="animate-fade-up delay-2">
+        Shop fresh produce, grains, farming tools and essentials — sourced directly from local farmers and delivered fast to your doorstep.
+      </p>
+      <div class="hero-cta animate-fade-up delay-3">
+        <a href="#featured" class="btn-hero-primary">
+          <i class="fas fa-shopping-bag"></i> Shop Now
+        </a>
+        <a href="#categories" class="btn-hero-outline">
+          <i class="fas fa-th-large"></i> Browse Categories
+        </a>
+        <a href="#sellers" class="btn-hero-ghost">
+          <i class="fas fa-store"></i> Become a Seller
+        </a>
+      </div>
+      <div class="hero-stats animate-fade-up delay-4">
+        <div class="hstat"><strong>10K+</strong><span>Products</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><strong>50K+</strong><span>Customers</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><strong>500+</strong><span>Farmers</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><strong>30+</strong><span>Cities</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual animate-fade-left">
+      <div class="hero-card-main">
+        <div class="hero-produce-ring">
+          <div class="ring-item r1">🥬</div>
+          <div class="ring-item r2">🍅</div>
+          <div class="ring-item r3">🌽</div>
+          <div class="ring-item r4">🥕</div>
+          <div class="ring-item r5">🍎</div>
+          <div class="ring-item r6">🌾</div>
+          <div class="ring-center">🌿</div>
+        </div>
+      </div>
+      <div class="hero-float fc-a">
+        <span>🥦</span>
+        <div><b>Fresh Broccoli</b><small>$2.99/kg</small></div>
+        <button onclick="addToCart('Broccoli',2.99,'🥦')">+</button>
+      </div>
+      <div class="hero-float fc-b">
+        <span>🌾</span>
+        <div><b>Wheat Grain</b><small>$1.49/kg</small></div>
+        <button onclick="addToCart('Wheat',1.49,'🌾')">+</button>
+      </div>
+      <div class="hero-float fc-c">
+        <span>⭐</span>
+        <div><b>Top Rated</b><small>4.9 / 5.0</small></div>
+      </div>
+      <div class="hero-float fc-d">
+        <span>🚚</span>
+        <div><b>Fast Delivery</b><small>24–48 hrs</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,100 L0,100 Z" fill="#fff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== TRUST BAR ========== -->
+<div class="trust-bar">
+  <div class="container trust-inner">
+    <div class="trust-item"><i class="fas fa-truck-fast"></i><div><strong>Free Delivery</strong><span>On orders over $50</span></div></div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><i class="fas fa-shield-halved"></i><div><strong>Secure Payment</strong><span>100% protected</span></div></div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><i class="fas fa-rotate-left"></i><div><strong>Easy Returns</strong><span>7-day return policy</span></div></div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><i class="fas fa-leaf"></i><div><strong>100% Organic</strong><span>Certified products</span></div></div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><i class="fas fa-headset"></i><div><strong>24/7 Support</strong><span>Always here for you</span></div></div>
+  </div>
+</div>
+
+<!-- ========== CATEGORIES ========== -->
+<section class="section categories-section" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-label">Shop by Category</p>
+        <h2>Explore Our <span>Product Range</span></h2>
+      </div>
+      <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="cats-grid">
+      <div class="cat-card" onclick="filterCategory('vegetables')">
+        <div class="cat-bg" style="--c1:#e8f5e9;--c2:#c8e6c9"><span>🥬</span></div>
+        <div class="cat-info"><h3>Vegetables</h3><p>Tomatoes, Onions, Kale...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('fruits')">
+        <div class="cat-bg" style="--c1:#fff3e0;--c2:#ffe0b2"><span>🍎</span></div>
+        <div class="cat-info"><h3>Fruits</h3><p>Mango, Avocado, Banana...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('grains')">
+        <div class="cat-bg" style="--c1:#fafafa;--c2:#f0f0f0"><span>🌾</span></div>
+        <div class="cat-info"><h3>Grains & Legumes</h3><p>Teff, Wheat, Beans, Lentils...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('spices')">
+        <div class="cat-bg" style="--c1:#fff8e1;--c2:#ffecb3"><span>�</span></div>
+        <div class="cat-info"><h3>Spices & Herbs</h3><p>Turmeric, Ginger, Cardamom...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('poultry')">
+        <div class="cat-bg" style="--c1:#fce4ec;--c2:#f8bbd0"><span>🥚</span></div>
+        <div class="cat-info"><h3>Poultry & Dairy</h3><p>Eggs, Milk, Chicken...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('meat')">
+        <div class="cat-bg" style="--c1:#fbe9e7;--c2:#ffccbc"><span>🥩</span></div>
+        <div class="cat-info"><h3>Livestock & Meat</h3><p>Beef, Mutton, Goat Meat...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('coffee')">
+        <div class="cat-bg" style="--c1:#efebe9;--c2:#d7ccc8"><span>☕</span></div>
+        <div class="cat-info"><h3>Coffee & Beverages</h3><p>Roasted, Raw Coffee...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('specialty')">
+        <div class="cat-bg" style="--c1:#f3e5f5;--c2:#e1bee7"><span>🍯</span></div>
+        <div class="cat-info"><h3>Specialty Products</h3><p>Honey, Moringa, Aloe Vera...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('processed')">
+        <div class="cat-bg" style="--c1:#e8eaf6;--c2:#c5cae9"><span>🍲</span></div>
+        <div class="cat-info"><h3>Processed Foods</h3><p>ዶሮ ወጥ, Snacks...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('household')">
+        <div class="cat-bg" style="--c1:#e0f7fa;--c2:#b2ebf2"><span>🏠</span></div>
+        <div class="cat-info"><h3>Household & Essentials</h3><p>Detergents, Cleaning...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('services')">
+        <div class="cat-bg" style="--c1:#e3f2fd;--c2:#bbdefb"><span>🚚</span></div>
+        <div class="cat-info"><h3>Services (አገልግሎት)</h3><p>Delivery, Logistics...</p></div>
+        <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="cat-card cat-special" onclick="filterCategory('all')">
+        <div class="cat-bg" style="--c1:#2E7D32;--c2:#1b5e20"><span style="filter:brightness(10)">🌍</span></div>
+        <div class="cat-info"><h3 style="color:#fff">All Products</h3><p style="color:#a5d6a7">Browse everything</p></div>
+        <div class="cat-arrow" style="color:#fff"><i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DEALS BANNER ========== -->
+<section class="deals-banner" id="deals">
+  <div class="container deals-inner">
+    <div class="deal-card deal-green">
+      <div class="deal-text">
+        <span class="deal-tag">Limited Time</span>
+        <h3>Fresh Vegetables</h3>
+        <p>Up to <strong>40% OFF</strong> on all organic vegetables</p>
+        <a href="#featured" class="btn-deal">Shop Vegetables</a>
+      </div>
+      <div class="deal-emoji">🥬🥦🥕</div>
+    </div>
+    <div class="deal-card deal-orange">
+      <div class="deal-text">
+        <span class="deal-tag">Flash Sale</span>
+        <h3>Farming Tools</h3>
+        <p>Premium tools starting from <strong>$9.99</strong></p>
+        <a href="#featured" class="btn-deal">Shop Tools</a>
+      </div>
+      <div class="deal-emoji">🛠️⛏️🌿</div>
+    </div>
+    <div class="deal-card deal-blue">
+      <div class="deal-text">
+        <span class="deal-tag">Bulk Buy</span>
+        <h3>Grains & Cereals</h3>
+        <p>Buy 10kg+ and save <strong>25%</strong> instantly</p>
+        <a href="#featured" class="btn-deal">Shop Grains</a>
+      </div>
+      <div class="deal-emoji">🌾🌽🍚</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURED PRODUCTS ========== -->
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-label">Handpicked for You</p>
+        <h2>Featured <span>Products</span></h2>
+      </div>
+      <a href="#" class="view-all-link">View All Products <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- Filter & Sort Bar -->
+    <div class="filter-sort-bar">
+      <div class="filter-tabs" id="filterTabs">
+        <button class="ftab active" onclick="setFilter(this,'all')">All</button>
+        <button class="ftab" onclick="setFilter(this,'vegetables')">🥬 Vegetables</button>
+        <button class="ftab" onclick="setFilter(this,'fruits')">🍎 Fruits</button>
+        <button class="ftab" onclick="setFilter(this,'grains')">🌾 Grains</button>
+        <button class="ftab" onclick="setFilter(this,'legumes')">🫘 Legumes</button>
+        <button class="ftab" onclick="setFilter(this,'spices')">🌿 Spices</button>
+        <button class="ftab" onclick="setFilter(this,'poultry')">🥚 Poultry</button>
+        <button class="ftab" onclick="setFilter(this,'meat')">🥩 Meat</button>
+        <button class="ftab" onclick="setFilter(this,'coffee')">☕ Coffee</button>
+        <button class="ftab" onclick="setFilter(this,'specialty')">🍯 Specialty</button>
+        <button class="ftab" onclick="setFilter(this,'processed')">🍲 Processed</button>
+        <button class="ftab" onclick="setFilter(this,'household')">🏠 Household</button>
+        <button class="ftab" onclick="setFilter(this,'services')">🚚 Services</button>
+      </div>
+      <div class="sort-price-wrap">
+        <select class="sort-select" onchange="sortProducts(this.value)">
+          <option value="default">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+          <option value="newest">Newest</option>
+        </select>
+        <div class="price-range-wrap">
+          <span>Max: $<span id="priceVal">100</span></span>
+          <input type="range" min="1" max="100" value="100" id="priceRange" oninput="filterPrice(this.value)" />
+        </div>
+      </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+
+    <div class="load-more-wrap">
+      <button class="btn-load-more" onclick="loadMore()">
+        <i class="fas fa-plus"></i> Load More Products
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TOP SELLERS ========== -->
+<section class="section sellers-section" id="sellers">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-label">Meet Our Farmers</p>
+        <h2>Top <span>Sellers</span></h2>
+      </div>
+      <a href="#" class="view-all-link">All Sellers <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="sellers-grid">
+      <div class="seller-card">
+        <div class="seller-cover" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"></div>
+        <div class="seller-avatar">👨🏿‍🌾</div>
+        <div class="seller-info">
+          <h3>Kwame Farms</h3>
+          <p>Accra, Ghana</p>
+          <div class="seller-stats">
+            <span><i class="fas fa-star"></i> 4.9</span>
+            <span><i class="fas fa-box"></i> 1.2K sales</span>
+          </div>
+          <div class="seller-tags"><span>Organic</span><span>Vegetables</span></div>
+          <button class="btn-visit-seller">Visit Store</button>
+        </div>
+      </div>
+      <div class="seller-card">
+        <div class="seller-cover" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)"></div>
+        <div class="seller-avatar">👩🏾‍🌾</div>
+        <div class="seller-info">
+          <h3>Amina's Harvest</h3>
+          <p>Nairobi, Kenya</p>
+          <div class="seller-stats">
+            <span><i class="fas fa-star"></i> 4.8</span>
+            <span><i class="fas fa-box"></i> 980 sales</span>
+          </div>
+          <div class="seller-tags"><span>Fruits</span><span>Grains</span></div>
+          <button class="btn-visit-seller">Visit Store</button>
+        </div>
+      </div>
+      <div class="seller-card">
+        <div class="seller-cover" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"></div>
+        <div class="seller-avatar">👨🏽‍🌾</div>
+        <div class="seller-info">
+          <h3>Ibrahim AgriCo</h3>
+          <p>Lagos, Nigeria</p>
+          <div class="seller-stats">
+            <span><i class="fas fa-star"></i> 4.7</span>
+            <span><i class="fas fa-box"></i> 2.1K sales</span>
+          </div>
+          <div class="seller-tags"><span>Tools</span><span>Seeds</span></div>
+          <button class="btn-visit-seller">Visit Store</button>
+        </div>
+      </div>
+      <div class="seller-card">
+        <div class="seller-cover" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)"></div>
+        <div class="seller-avatar">👩🏿‍🌾</div>
+        <div class="seller-info">
+          <h3>Fatima Fresh</h3>
+          <p>Dakar, Senegal</p>
+          <div class="seller-stats">
+            <span><i class="fas fa-star"></i> 4.9</span>
+            <span><i class="fas fa-box"></i> 750 sales</span>
+          </div>
+          <div class="seller-tags"><span>Organic</span><span>Herbs</span></div>
+          <button class="btn-visit-seller">Visit Store</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY CHOOSE US ========== -->
+<section class="section why-section" id="why-us">
+  <div class="container">
+    <div class="section-head centered">
+      <p class="section-label">Why Hafa Market</p>
+      <h2>Built for <span>Farmers & Buyers</span></h2>
+      <p class="section-sub">We make agricultural commerce simple, fast, and reliable for everyone.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card wc-green">
+        <div class="why-icon"><i class="fas fa-truck-fast"></i></div>
+        <h3>Fast Delivery</h3>
+        <p>Get your orders delivered within 24–48 hours right to your doorstep, anywhere in the city.</p>
+        <div class="why-num">01</div>
+      </div>
+      <div class="why-card wc-orange">
+        <div class="why-icon"><i class="fas fa-medal"></i></div>
+        <h3>High-Quality Products</h3>
+        <p>All products are verified and sourced directly from trusted, certified local farmers.</p>
+        <div class="why-num">02</div>
+      </div>
+      <div class="why-card wc-blue">
+        <div class="why-icon"><i class="fas fa-tag"></i></div>
+        <h3>Affordable Prices</h3>
+        <p>Competitive pricing with regular deals and bulk discounts. No middlemen, better prices.</p>
+        <div class="why-num">03</div>
+      </div>
+      <div class="why-card wc-purple">
+        <div class="why-icon"><i class="fas fa-mobile-screen"></i></div>
+        <h3>Easy Ordering</h3>
+        <p>Simple, intuitive interface — order in just a few taps or clicks from any device.</p>
+        <div class="why-num">04</div>
+      </div>
+      <div class="why-card wc-teal">
+        <div class="why-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>Trusted Platform</h3>
+        <p>Secure payments, buyer protection, verified seller profiles, and dispute resolution.</p>
+        <div class="why-num">05</div>
+      </div>
+      <div class="why-card wc-red">
+        <div class="why-icon"><i class="fas fa-headset"></i></div>
+        <h3>24/7 Support</h3>
+        <p>Our dedicated support team is always available via chat, call, or email to help you.</p>
+        <div class="why-num">06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="section how-section">
+  <div class="container">
+    <div class="section-head centered">
+      <p class="section-label">Simple Process</p>
+      <h2>How It <span>Works</span></h2>
+      <p class="section-sub">Start shopping or selling in just 3 easy steps</p>
+    </div>
+    <div class="how-tabs">
+      <button class="how-tab active" onclick="switchHow(this,'buyers')">For Buyers</button>
+      <button class="how-tab" onclick="switchHow(this,'sellers')">For Sellers</button>
+    </div>
+    <div class="how-content" id="howBuyers">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <div class="how-step-icon">🔍</div>
+        <h3>Browse & Discover</h3>
+        <p>Search or browse thousands of fresh agricultural products by category, price, rating, or location.</p>
+      </div>
+      <div class="how-connector"><i class="fas fa-arrow-right"></i></div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <div class="how-step-icon">🛒</div>
+        <h3>Add to Cart & Pay</h3>
+        <p>Add items to your cart, choose your delivery address, and pay securely online or cash on delivery.</p>
+      </div>
+      <div class="how-connector"><i class="fas fa-arrow-right"></i></div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <div class="how-step-icon">📦</div>
+        <h3>Receive Delivery</h3>
+        <p>Sit back and relax. Track your order in real-time and receive fresh products at your door.</p>
+      </div>
+    </div>
+    <div class="how-content hidden" id="howSellers">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <div class="how-step-icon">📝</div>
+        <h3>Register & Verify</h3>
+        <p>Create your seller account, verify your identity, and set up your farm store profile in minutes.</p>
+      </div>
+      <div class="how-connector"><i class="fas fa-arrow-right"></i></div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <div class="how-step-icon">📸</div>
+        <h3>List Your Products</h3>
+        <p>Upload your products with photos, descriptions, and pricing. Reach thousands of buyers instantly.</p>
+      </div>
+      <div class="how-connector"><i class="fas fa-arrow-right"></i></div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <div class="how-step-icon">💰</div>
+        <h3>Sell & Get Paid</h3>
+        <p>Receive orders, fulfill them, and get paid directly to your mobile money or bank account.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS SECTION ========== -->
+<section class="stats-section">
+  <div class="container stats-inner">
+    <div class="stat-item">
+      <div class="stat-icon">🌍</div>
+      <div class="stat-num" data-target="50000">0</div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">👨‍🌾</div>
+      <div class="stat-num" data-target="500">0</div>
+      <div class="stat-label">Verified Farmers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">📦</div>
+      <div class="stat-num" data-target="10000">0</div>
+      <div class="stat-label">Products Listed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">🏙️</div>
+      <div class="stat-num" data-target="30">0</div>
+      <div class="stat-label">Cities Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-num" data-target="98">0</div>
+      <div class="stat-label">% Satisfaction Rate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== APP PREVIEW ========== -->
+<section class="section app-section">
+  <div class="container">
+    <div class="section-head centered">
+      <p class="section-label">Platform Experience</p>
+      <h2>Shop Smarter on <span>Any Device</span></h2>
+      <p class="section-sub">A seamless, beautiful experience whether you're on mobile, tablet, or desktop</p>
+    </div>
+    <div class="app-preview-grid">
+      <div class="app-preview-card">
+        <div class="phone-wrap">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ps-header"><span class="ps-logo">🌿 Hafa</span><span><i class="fas fa-shopping-cart"></i></span></div>
+              <div class="ps-search">🔍 Search fresh products...</div>
+              <div class="ps-banner">🎉 Fresh Deals Today — Up to 40% OFF</div>
+              <div class="ps-cats"><span>🥬</span><span>🍎</span><span>🌾</span><span>🛠️</span></div>
+              <div class="ps-label">Featured</div>
+              <div class="ps-products">
+                <div class="ps-prod"><span>🥦</span><small>Broccoli</small><b>$2.99</b></div>
+                <div class="ps-prod"><span>🍅</span><small>Tomatoes</small><b>$1.99</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>Easy Shopping</h3>
+        <p>Browse and discover thousands of fresh products with smart search and filters</p>
+      </div>
+      <div class="app-preview-card app-preview-featured">
+        <div class="phone-wrap">
+          <div class="phone-frame phone-large">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ps-header"><span>🛒 My Cart</span><span class="ps-close">×</span></div>
+              <div class="ps-cart-item"><span>🥦</span><div><b>Broccoli x2</b><small>$5.98</small></div><span class="ps-qty">−2+</span></div>
+              <div class="ps-cart-item"><span>🌾</span><div><b>Wheat 5kg</b><small>$7.99</small></div><span class="ps-qty">−1+</span></div>
+              <div class="ps-cart-item"><span>🍅</span><div><b>Tomatoes</b><small>$1.99</small></div><span class="ps-qty">−1+</span></div>
+              <div class="ps-divider"></div>
+              <div class="ps-total"><span>Subtotal</span><b>$15.96</b></div>
+              <div class="ps-checkout">Proceed to Checkout →</div>
+            </div>
+          </div>
+        </div>
+        <h3>Secure Checkout</h3>
+        <p>Fast, safe payment with multiple options — card, mobile money, or cash on delivery</p>
+      </div>
+      <div class="app-preview-card">
+        <div class="phone-wrap">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ps-header"><span>📦 Track Order</span></div>
+              <div class="ps-track-id">Order #HM-2024-0892</div>
+              <div class="ps-track-steps">
+                <div class="ps-track-step done"><i class="fas fa-check-circle"></i><span>Order Placed</span></div>
+                <div class="ps-track-line done"></div>
+                <div class="ps-track-step done"><i class="fas fa-check-circle"></i><span>Processing</span></div>
+                <div class="ps-track-line active"></div>
+                <div class="ps-track-step active"><i class="fas fa-truck"></i><span>On the Way</span></div>
+                <div class="ps-track-line"></div>
+                <div class="ps-track-step"><i class="fas fa-home"></i><span>Delivered</span></div>
+              </div>
+              <div class="ps-eta">🕐 Estimated: 2 hours</div>
+            </div>
+          </div>
+        </div>
+        <h3>Real-Time Tracking</h3>
+        <p>Track your orders live from farm to your doorstep with instant notifications</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BLOG SECTION ========== -->
+<section class="section blog-section" id="blog">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-label">Farm Knowledge</p>
+        <h2>From the <span>Farm Blog</span></h2>
+      </div>
+      <a href="#" class="view-all-link">All Articles <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card blog-featured">
+        <div class="blog-img" style="background:linear-gradient(135deg,#1b5e20,#2E7D32)">
+          <span class="blog-emoji">🌱</span>
+          <span class="blog-cat-tag">Farming Tips</span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> Jan 15, 2026</span><span><i class="fas fa-clock"></i> 5 min read</span></div>
+          <h3>10 Tips for Growing Organic Vegetables at Home</h3>
+          <p>Learn how to start your own organic vegetable garden with minimal space and investment...</p>
+          <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background:linear-gradient(135deg,#e65100,#ff7043)">
+          <span class="blog-emoji">🌾</span>
+          <span class="blog-cat-tag">Market Trends</span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> Jan 10, 2026</span><span><i class="fas fa-clock"></i> 3 min read</span></div>
+          <h3>Grain Prices in 2026: What Farmers Need to Know</h3>
+          <p>A comprehensive look at grain market trends and how to maximize your profits...</p>
+          <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background:linear-gradient(135deg,#1565c0,#1976d2)">
+          <span class="blog-emoji">💧</span>
+          <span class="blog-cat-tag">Technology</span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> Jan 5, 2026</span><span><i class="fas fa-clock"></i> 4 min read</span></div>
+          <h3>Smart Irrigation Systems for Small-Scale Farmers</h3>
+          <p>How modern irrigation technology is helping African farmers save water and increase yields...</p>
+          <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="section testi-section" id="testimonials">
+  <div class="container">
+    <div class="section-head centered">
+      <p class="section-label">Customer Stories</p>
+      <h2>What Our <span>Community Says</span></h2>
+      <p class="section-sub">Real reviews from real farmers and buyers across Africa</p>
+    </div>
+    <div class="testi-slider" id="testiSlider">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <div class="testi-stars">★★★★★</div>
+          <p>"Hafa Market has completely changed how I buy vegetables. The quality is amazing and delivery is always on time. I've saved so much money compared to local markets!"</p>
+          <div class="testi-author">
+            <div class="testi-av">👩🏾</div>
+            <div><strong>Amina Hassan</strong><span>Home Buyer · Nairobi, Kenya</span></div>
+          </div>
+        </div>
+        <div class="testi-card testi-featured">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <div class="testi-stars">★★★★★</div>
+          <p>"As a farmer, Hafa Market gives me a direct channel to sell my produce without middlemen. My income has increased by 40% since I joined. This platform is a game changer!"</p>
+          <div class="testi-author">
+            <div class="testi-av">👨🏿</div>
+            <div><strong>Kwame Asante</strong><span>Farmer · Accra, Ghana</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <div class="testi-stars">★★★★☆</div>
+          <p>"The farming tools section is incredible. I found everything I needed at prices much lower than local stores. The customer support team is also very responsive!"</p>
+          <div class="testi-author">
+            <div class="testi-av">👨🏽</div>
+            <div><strong>Ibrahim Musa</strong><span>Farm Owner · Lagos, Nigeria</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <div class="testi-stars">★★★★★</div>
+          <p>"I love how easy it is to track my orders. The real-time tracking feature gives me peace of mind. Fresh produce delivered right to my restaurant every morning!"</p>
+          <div class="testi-author">
+            <div class="testi-av">👩🏿</div>
+            <div><strong>Fatima Diallo</strong><span>Restaurant Owner · Dakar, Senegal</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots"></div>
+  </div>
+</section>
+
+<!-- ========== NEWSLETTER ========== -->
+<section class="newsletter-section">
+  <div class="container newsletter-inner">
+    <div class="nl-left">
+      <span class="nl-icon">📬</span>
+      <div>
+        <h3>Stay Updated with Fresh Deals</h3>
+        <p>Get weekly deals, farming tips, and new product alerts straight to your inbox.</p>
+      </div>
+    </div>
+    <form class="nl-form" onsubmit="subscribeNewsletter(event)">
+      <input type="email" placeholder="Enter your email address" required />
+      <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- ========== CTA SECTION ========== -->
+<section class="cta-section">
+  <div class="cta-bg">
+    <div class="cta-blob cb1"></div>
+    <div class="cta-blob cb2"></div>
+  </div>
+  <div class="container cta-inner">
+    <div class="cta-badge">🌿 Join 50,000+ Happy Customers</div>
+    <h2>Start Shopping Fresh Today</h2>
+    <p>Get access to thousands of fresh agricultural products at the best prices, delivered fast.</p>
+    <div class="cta-btns">
+      <a href="#featured" class="btn-cta-primary"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+      <button class="btn-cta-white" onclick="openModal('signupModal')"><i class="fas fa-user-plus"></i> Create Free Account</button>
+      <button class="btn-cta-outline" onclick="openModal('sellerModal')"><i class="fas fa-store"></i> Sell on Hafa</button>
+    </div>
+    <div class="cta-app-links">
+      <span>Also available on:</span>
+      <a href="#" class="app-link"><i class="fab fa-google-play"></i> Google Play</a>
+      <a href="#" class="app-link"><i class="fab fa-apple"></i> App Store</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo logo-white">
+          <div class="logo-mark"><span>🌿</span></div>
+          <div class="logo-text-wrap">
+            <span class="logo-name" style="color:#fff">Hafa <em style="color:#a5d6a7">Market</em></span>
+            <span class="logo-tagline" style="color:rgba(255,255,255,.5)">Farm Fresh Delivered</span>
+          </div>
+        </a>
+        <p>Your trusted marketplace for fresh and essential agricultural products. Connecting farmers and buyers across Africa since 2024.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="footer-app-btns">
+          <a href="#" class="footer-app-btn"><i class="fab fa-google-play"></i><div><small>Get it on</small><span>Google Play</span></div></a>
+          <a href="#" class="footer-app-btn"><i class="fab fa-apple"></i><div><small>Download on</small><span>App Store</span></div></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#categories"><i class="fas fa-chevron-right"></i> Categories</a></li>
+          <li><a href="#featured"><i class="fas fa-chevron-right"></i> Products</a></li>
+          <li><a href="#deals"><i class="fas fa-chevron-right"></i> Today's Deals</a></li>
+          <li><a href="#sellers"><i class="fas fa-chevron-right"></i> Top Sellers</a></li>
+          <li><a href="#blog"><i class="fas fa-chevron-right"></i> Farm Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Vegetables</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Fruits</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Grains & Cereals</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Seeds & Fertilizers</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Farming Tools</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Organic Products</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Seller Portal</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact">
+          <div class="fc-item"><i class="fas fa-map-marker-alt"></i><span>Nairobi, Kenya · Accra, Ghana · Lagos, Nigeria</span></div>
+          <div class="fc-item"><i class="fas fa-phone"></i><span>+254 700 000 000</span></div>
+          <div class="fc-item"><i class="fas fa-envelope"></i><span>hello@hafamarket.com</span></div>
+          <div class="fc-item"><i class="fas fa-clock"></i><span>Mon–Sat: 8am – 8pm</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Hafa Market. All rights reserved. Made with 💚 for African Farmers & Buyers.</p>
+      <div class="footer-pay-icons">
+        <span title="Visa"><i class="fab fa-cc-visa"></i></span>
+        <span title="Mastercard"><i class="fab fa-cc-mastercard"></i></span>
+        <span title="PayPal"><i class="fab fa-cc-paypal"></i></span>
+        <span title="M-Pesa">M-Pesa</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== BACK TO TOP ========== -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+a>
+
+<!-- ========== CART SIDEBAR ========== -->
+<div class="overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="sidebar-header">
+    <h3><i class="fas fa-shopping-cart"></i> My Cart <span id="cartCountSidebar">(0)</span></h3>
+    <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="empty-state"><span>🛒</span><p>Your cart is empty</p><small>Add some fresh products!</small></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-summary">
+      <div class="cs-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+      <div class="cs-row"><span>Delivery</span><span class="cs-free">FREE</span></div>
+      <div class="cs-row cs-total"><span>Total</span><strong id="cartTotal">$0.00</strong></div>
+    </div>
+    <button class="btn-checkout">Proceed to Checkout <i class="fas fa-arrow-right"></i></button>
+    <button class="btn-continue" onclick="toggleCart()">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- ========== WISHLIST SIDEBAR ========== -->
+<div class="overlay" id="wishOverlay" onclick="toggleWishlistPanel()"></div>
+<div class="cart-sidebar" id="wishSidebar">
+  <div class="sidebar-header">
+    <h3><i class="fas fa-heart"></i> Wishlist <span id="wishCountSidebar">(0)</span></h3>
+    <button onclick="toggleWishlistPanel()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="wishItems">
+    <div class="empty-state"><span>💚</span><p>Your wishlist is empty</p><small>Save products you love!</small></div>
+  </div>
+</div>
+
+<!-- ========== PRODUCT DETAIL MODAL ========== -->
+<div class="modal-overlay" id="productModal" onclick="closeModalOutside(event,'productModal')">
+  <div class="modal modal-product">
+    <button class="modal-close" onclick="closeModal('productModal')"><i class="fas fa-times"></i></button>
+    <div id="productModalContent"></div>
+  </div>
+</div>
+
+<!-- ========== LOGIN MODAL ========== -->
+<div class="modal-overlay" id="loginModal" onclick="closeModalOutside(event,'loginModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')"><i class="fas fa-times"></i></button>
+    <div class="modal-logo">🌿 Hafa Market</div>
+    <h2>Welcome Back</h2>
+    <p>Sign in to your account to continue shopping</p>
+    <form onsubmit="return false">
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Password</label><div class="pw-wrap"><input type="password" id="loginPw" placeholder="••••••••" /><button type="button" onclick="togglePw('loginPw')"><i class="fas fa-eye"></i></button></div></div>
+      <div class="form-row"><label class="checkbox-label"><input type="checkbox" /> Remember me</label><a href="#" class="forgot-link">Forgot password?</a></div>
+      <button type="submit" class="btn-modal-primary">Login to Account</button>
+    </form>
+    <div class="modal-divider"><span>or continue with</span></div>
+    <div class="social-login">
+      <button class="btn-social"><i class="fab fa-google"></i> Google</button>
+      <button class="btn-social"><i class="fab fa-facebook-f"></i> Facebook</button>
+    </div>
+    <p class="modal-switch">Don't have an account? <a onclick="switchModal('loginModal','signupModal')">Sign Up Free</a></p>
+  </div>
+</div>
+
+<!-- ========== SIGNUP MODAL ========== -->
+<div class="modal-overlay" id="signupModal" onclick="closeModalOutside(event,'signupModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('signupModal')"><i class="fas fa-times"></i></button>
+    <div class="modal-logo">🌿 Hafa Market</div>
+    <h2>Create Your Account</h2>
+    <p>Join 50,000+ customers shopping fresh today</p>
+    <form onsubmit="return false">
+      <div class="form-row-2">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="John" /></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe" /></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+254 700 000 000" /></div>
+      <div class="form-group"><label>Password</label><div class="pw-wrap"><input type="password" id="signupPw" placeholder="••••••••" /><button type="button" onclick="togglePw('signupPw')"><i class="fas fa-eye"></i></button></div></div>
+      <div class="form-group"><label class="checkbox-label"><input type="checkbox" required /> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label></div>
+      <button type="submit" class="btn-modal-primary">Create Free Account</button>
+    </form>
+    <div class="modal-divider"><span>or sign up with</span></div>
+    <div class="social-login">
+      <button class="btn-social"><i class="fab fa-google"></i> Google</button>
+      <button class="btn-social"><i class="fab fa-facebook-f"></i> Facebook</button>
+    </div>
+    <p class="modal-switch">Already have an account? <a onclick="switchModal('signupModal','loginModal')">Login</a></p>
+  </div>
+</div>
+
+<!-- ========== SELLER MODAL ========== -->
+<div class="modal-overlay" id="sellerModal" onclick="closeModalOutside(event,'sellerModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sellerModal')"><i class="fas fa-times"></i></button>
+    <div class="modal-logo">🌿 Hafa Market</div>
+    <h2>Become a Seller</h2>
+    <p>Start selling your farm products to thousands of buyers</p>
+    <form onsubmit="return false">
+      <div class="form-group"><label>Farm / Business Name</label><input type="text" placeholder="e.g. Kwame Farms" /></div>
+      <div class="form-group"><label>Your Name</label><input type="text" placeholder="Full name" /></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+254 700 000 000" /></div>
+      <div class="form-group"><label>Location / City</label><input type="text" placeholder="e.g. Nairobi, Kenya" /></div>
+      <div class="form-group"><label>What do you sell?</label><select><option>Vegetables</option><option>Fruits</option><option>Grains</option><option>Seeds & Fertilizers</option><option>Farming Tools</option><option>Multiple Categories</option></select></div>
+      <button type="submit" class="btn-modal-primary">Submit Application</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js"></script>
+<script src="ai-assistant.js"></script>
+<script src="live-support.js"></script>
+</body>
+</html>

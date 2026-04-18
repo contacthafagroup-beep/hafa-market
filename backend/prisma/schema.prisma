@@ -1,0 +1,1332 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== ENUMS =====
+enum Role {
+  BUYER
+  SELLER
+  ADMIN
+  DELIVERY_AGENT
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  MPESA
+  CARD
+  FLUTTERWAVE
+  CHAPA
+  CASH_ON_DELIVERY
+  PAYMENT_ON_DELIVERY
+  PAYPAL
+  TELEBIRR
+  CBE_BIRR
+  BANK_TRANSFER
+  CHAPA_BANK
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  OUT_OF_STOCK
+  PENDING_REVIEW
+}
+
+enum SellerStatus {
+  PENDING
+  VERIFIED
+  SUSPENDED
+}
+
+enum DeliveryStatus {
+  PENDING
+  ASSIGNED
+  PICKED_UP
+  IN_TRANSIT
+  DELIVERED
+  FAILED
+}
+
+enum NotificationType {
+  ORDER_PLACED
+  ORDER_CONFIRMED
+  ORDER_SHIPPED
+  ORDER_DELIVERED
+  ORDER_CANCELLED
+  PAYMENT_SUCCESS
+  PAYMENT_FAILED
+  NEW_MESSAGE
+  PROMO
+  SYSTEM
+}
+
+// ===== USER =====
+model User {
+  id              String    @id @default(uuid())
+  email           String?   @unique
+  phone           String?   @unique
+  name            String
+  avatar          String?
+  role            Role      @default(BUYER)
+  isVerified      Boolean   @default(false)
+  isActive        Boolean   @default(true)
+  passwordHash    String?
+  googleId        String?   @unique
+  facebookId      String?   @unique
+  language        String    @default("en")
+  fcmToken        String?
+  telegramChatId  String?
+  loyaltyPoints   Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  addresses       Address[]
+  orders          Order[]
+  cart            CartItem[]
+  wishlist        WishlistItem[]
+  reviews         Review[]
+  seller          Seller?
+  notifications   Notification[]
+  refreshTokens   RefreshToken[]
+  otpCodes        OtpCode[]
+  chatMessages    ChatMessage[]
+  auditLogs       AuditLog[]
+
+  @@map("users")
+}
+
+// ===== ADDRESS =====
+model Address {
+  id          String   @id @default(uuid())
+  userId      String
+  label       String   @default("Home")
+  fullName    String
+  phone       String
+  street      String
+  city        String
+  region      String
+  country     String   @default("Ethiopia")
+  postalCode  String?
+  kebele      String?
+  woreda      String?
+  zone        String?
+  latitude    Float?
+  longitude   Float?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders      Order[]
+
+  @@map("addresses")
+}
+
+// ===== REFRESH TOKEN =====
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  userAgent String?
+  ip        String?
+  deviceId  String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+// ===== OTP =====
+model OtpCode {
+  id        String   @id @default(uuid())
+  userId    String
+  code      String
+  type      String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("otp_codes")
+}
+
+// ===== CATEGORY =====
+model Category {
+  id          String     @id @default(uuid())
+  name        String
+  nameAm      String?
+  nameOm      String?
+  slug        String     @unique
+  emoji       String?
+  image       String?
+  description String?
+  parentId    String?
+  isActive    Boolean    @default(true)
+  sortOrder   Int        @default(0)
+  createdAt   DateTime   @default(now())
+
+  parent      Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryTree")
+  products    Product[]
+
+  @@map("categories")
+}
+
+// ===== SELLER =====
+model Seller {
+  id            String       @id @default(uuid())
+  userId        String       @unique
+  storeName     String
+  storeSlug     String       @unique
+  description   String?
+  logo          String?
+  coverImage    String?
+  phone         String?
+  email         String?
+  city          String?
+  region        String?
+  country       String       @default("Ethiopia")
+  latitude      Float?
+  longitude     Float?
+  status        SellerStatus @default(PENDING)
+  rating        Float        @default(0)
+  totalSales    Int          @default(0)
+  totalRevenue  Float        @default(0)
+  bankName      String?
+  bankAccount   String?
+  mpesaNumber   String?
+  telebirrNumber String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products      Product[]
+  payouts       Payout[]
+  ads           Ad[]
+
+  @@map("sellers")
+}
+
+// ===== PRODUCT =====
+model Product {
+  id            String        @id @default(uuid())
+  sellerId      String
+  categoryId    String
+  name          String
+  nameAm        String?
+  nameOm        String?
+  slug          String        @unique
+  description   String?
+  descriptionAm String?
+  price         Float
+  comparePrice  Float?
+  unit          String        @default("kg")
+  minOrder      Float         @default(1)
+  stock         Float         @default(0)
+  images        String[]
+  tags          String[]
+  isOrganic     Boolean       @default(false)
+  isFeatured    Boolean       @default(false)
+  status        ProductStatus @default(ACTIVE)
+  rating        Float         @default(0)
+  reviewCount   Int           @default(0)
+  soldCount     Int           @default(0)
+  viewCount     Int           @default(0)
+  weight        Float?
+  origin        String?
+  marketPrice   Float?
+  season        String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  seller        Seller        @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  category      Category      @relation(fields: [categoryId], references: [id])
+  cartItems     CartItem[]
+  wishlistItems WishlistItem[]
+  orderItems    OrderItem[]
+  reviews       Review[]
+  variants      ProductVariant[]
+  priceAlerts   PriceAlert[]
+  ads           Ad[]
+  qa            ProductQA[]
+
+  @@map("products")
+}
+
+// ===== CART =====
+model CartItem {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  quantity  Float    @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("cart_items")
+}
+
+// ===== WISHLIST =====
+model WishlistItem {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("wishlist_items")
+}
+
+// ===== ORDER =====
+model Order {
+  id              String        @id @default(uuid())
+  userId          String
+  addressId       String
+  status          OrderStatus   @default(PENDING)
+  subtotal        Float
+  deliveryFee     Float         @default(0)
+  discount        Float         @default(0)
+  total           Float
+  promoCode       String?
+  notes           String?
+  deliverySlot    String?
+  estimatedAt     DateTime?
+  deliveredAt     DateTime?
+  cancelledAt     DateTime?
+  cancelReason    String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user            User          @relation(fields: [userId], references: [id])
+  address         Address       @relation(fields: [addressId], references: [id])
+  items           OrderItem[]
+  payment         Payment?
+  delivery        Delivery?
+  statusHistory   OrderStatusHistory[]
+
+  @@map("orders")
+}
+
+// ===== ORDER ITEM =====
+model OrderItem {
+  id          String   @id @default(uuid())
+  orderId     String
+  productId   String
+  productName String
+  productImg  String?
+  quantity    Float
+  unitPrice   Float
+  totalPrice  Float
+  unit        String   @default("kg")
+
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+// ===== ORDER STATUS HISTORY =====
+model OrderStatusHistory {
+  id        String      @id @default(uuid())
+  orderId   String
+  status    OrderStatus
+  note      String?
+  createdAt DateTime    @default(now())
+
+  order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_status_history")
+}
+
+// ===== PAYMENT =====
+model Payment {
+  id              String        @id @default(uuid())
+  orderId         String        @unique
+  amount          Float
+  currency        String        @default("ETB")
+  method          PaymentMethod
+  status          PaymentStatus @default(PENDING)
+  transactionId   String?       @unique
+  providerRef     String?
+  mpesaCode       String?
+  chapaRef        String?
+  idempotencyKey  String?       @unique
+  processedAt     DateTime?
+  podCollected    Boolean       @default(false)
+  podCollectedAt  DateTime?
+  paidAt          DateTime?
+  failureReason   String?
+  retryCount      Int           @default(0)
+  expiresAt       DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  order           Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  bankTransfer    BankTransfer?
+  logs            PaymentLog[]
+
+  @@index([status])
+  @@index([expiresAt])
+  @@map("payments")
+}
+
+// ===== PAYMENT LOG =====
+model PaymentLog {
+  id        String   @id @default(uuid())
+  paymentId String
+  event     String
+  status    String
+  data      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  payment   Payment  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@index([paymentId])
+  @@index([event])
+  @@map("payment_logs")
+}
+
+// ===== DELIVERY =====
+model Delivery {
+  id              String         @id @default(uuid())
+  orderId         String         @unique
+  agentId         String?
+  status          DeliveryStatus @default(PENDING)
+  trackingCode    String?        @unique
+  currentLat      Float?
+  currentLng      Float?
+  estimatedAt     DateTime?
+  pickedUpAt      DateTime?
+  deliveredAt     DateTime?
+  failureReason   String?
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  order           Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  agent           DeliveryAgent? @relation(fields: [agentId], references: [id])
+
+  @@map("deliveries")
+}
+
+// ===== DELIVERY AGENT =====
+model DeliveryAgent {
+  id           String     @id @default(uuid())
+  userId       String     @unique
+  vehicleType  String?
+  plateNumber  String?
+  isAvailable  Boolean    @default(true)
+  currentLat   Float?
+  currentLng   Float?
+  totalDeliveries Int     @default(0)
+  rating       Float      @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  deliveries   Delivery[]
+
+  @@map("delivery_agents")
+}
+
+// ===== REVIEW =====
+model Review {
+  id               String   @id @default(uuid())
+  userId           String
+  productId        String
+  rating           Int
+  comment          String?
+  images           String[]
+  isVerified       Boolean  @default(false)
+  helpfulVotes     Int      @default(0)
+  unhelpfulVotes   Int      @default(0)
+  sellerResponse   String?
+  sellerResponseAt DateTime?
+  // Fraud detection
+  isSuspicious     Boolean  @default(false)
+  fraudFlags       String[] @default([])
+  moderationStatus String   @default("APPROVED") // APPROVED | FLAGGED | HIDDEN | DISMISSED
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  votes            ReviewVote[]
+
+  @@unique([userId, productId])
+  @@index([isSuspicious])
+  @@index([moderationStatus])
+  @@map("reviews")
+}
+
+// ===== PROMO CODE =====
+model PromoCode {
+  id              String    @id @default(uuid())
+  code            String    @unique
+  description     String?
+  discountType    String    @default("PERCENTAGE")
+  discountValue   Float
+  minOrderAmount  Float     @default(0)
+  maxUses         Int?
+  usedCount       Int       @default(0)
+  isActive        Boolean   @default(true)
+  expiresAt       DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@map("promo_codes")
+}
+
+// ===== NOTIFICATION =====
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  type      NotificationType
+  title     String
+  body      String
+  data      Json?
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// ===== PAYOUT =====
+model Payout {
+  id          String   @id @default(uuid())
+  sellerId    String
+  amount      Float
+  method      String
+  accountRef  String
+  status      String   @default("PENDING")
+  processedAt DateTime?
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  seller      Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  @@map("payouts")
+}
+
+// ===== CHAT ROOM =====
+model ChatRoom {
+  id          String        @id @default(uuid())
+  type        String        @default("SUPPORT")
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  messages    ChatMessage[]
+  participants ChatParticipant[]
+
+  @@map("chat_rooms")
+}
+
+// ===== CHAT PARTICIPANT =====
+model ChatParticipant {
+  id         String    @id @default(uuid())
+  roomId     String
+  userId     String
+  joinedAt   DateTime  @default(now())
+  lastReadAt DateTime?
+
+  room       ChatRoom  @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+  @@map("chat_participants")
+}
+
+// ===== CHAT MESSAGE =====
+model ChatMessage {
+  id          String    @id @default(uuid())
+  roomId      String
+  senderId    String
+  type        String    @default("TEXT")
+  content     String?
+  fileUrl     String?
+  fileName    String?
+  fileSize    Int?
+  mimeType    String?
+  duration    Int?
+  isRead      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+
+  room        ChatRoom  @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  sender      User      @relation(fields: [senderId], references: [id])
+
+  @@map("chat_messages")
+}
+
+// ===== BLOG POST =====
+model BlogPost {
+  id          String   @id @default(uuid())
+  title       String
+  titleAm     String?
+  slug        String   @unique
+  excerpt     String?
+  content     String
+  coverImage  String?
+  category    String?
+  tags        String[]
+  authorId    String
+  isPublished Boolean  @default(false)
+  publishedAt DateTime?
+  viewCount   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("blog_posts")
+}
+
+// ===== BANNER / PROMO SLIDE =====
+model Banner {
+  id         String   @id @default(uuid())
+  title      String
+  subtitle   String?
+  image      String
+  linkUrl    String?
+  isActive   Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  startsAt   DateTime?
+  endsAt     DateTime?
+  createdAt  DateTime @default(now())
+
+  @@map("banners")
+}
+
+// ===== SEARCH LOG =====
+model SearchLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  query     String
+  results   Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("search_logs")
+}
+
+// ===== PRODUCT VIEW LOG =====
+model ProductView {
+  id        String   @id @default(uuid())
+  productId String
+  userId    String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@map("product_views")
+}
+
+// ===== AUDIT LOG =====
+model AuditLog {
+  id         String   @id @default(uuid())
+  action     String
+  userId     String?
+  targetId   String?
+  targetType String?
+  before     Json?
+  after      Json?
+  meta       Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+  @@index([targetId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ===== PRODUCT VARIANT =====
+model ProductVariant {
+  id          String   @id @default(uuid())
+  productId   String
+  name        String
+  value       String
+  priceAdjust Float    @default(0)
+  stock       Float    @default(0)
+  sku         String?  @unique
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_variants")
+}
+
+// ===== BANK TRANSFER =====
+model BankTransfer {
+  id                  String    @id @default(uuid())
+  paymentId           String    @unique
+  bankName            String
+  accountName         String
+  accountNumber       String
+  referenceCode       String    @unique
+  amount              Float
+  currency            String    @default("ETB")
+  senderName          String?
+  senderAccount       String?
+  senderBankTxId      String?
+  transferDate        DateTime?
+  proofImageUrl       String?
+  notes               String?
+  verifiedBy          String?
+  verifiedAt          DateTime?
+  rejectionReason     String?
+  status              String    @default("PENDING")
+  submissionCount     Int       @default(0)
+  lastSubmittedAt     DateTime?
+  expiresAt           DateTime?
+  autoMatchScore      Float?
+  autoMatchData       Json?
+  fraudFlags          String[]
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  payment             Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@index([referenceCode])
+  @@index([status])
+  @@index([expiresAt])
+  @@index([senderBankTxId])
+  @@map("bank_transfers")
+}
+
+// ===== REFUND =====
+model Refund {
+  id              String    @id @default(uuid())
+  paymentId       String
+  orderId         String
+  userId          String
+  amount          Float
+  reason          String
+  status          String    @default("PENDING")
+  method          String
+  refundRef       String?   @unique
+  processedBy     String?
+  processedAt     DateTime?
+  failureReason   String?
+  walletCredited  Boolean   @default(false)
+  notes           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([orderId])
+  @@index([userId])
+  @@index([status])
+  @@map("refunds")
+}
+
+// ===== WALLET =====
+model Wallet {
+  id          String    @id @default(uuid())
+  userId      String    @unique
+  balance     Float     @default(0)
+  currency    String    @default("ETB")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  transactions WalletTransaction[]
+
+  @@map("wallets")
+}
+
+// ===== WALLET TRANSACTION =====
+model WalletTransaction {
+  id          String   @id @default(uuid())
+  walletId    String
+  type        String
+  amount      Float
+  balance     Float
+  description String
+  refId       String?
+  createdAt   DateTime @default(now())
+
+  wallet      Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId])
+  @@map("wallet_transactions")
+}
+
+// ===== BULK ORDER =====
+model BulkOrder {
+  id              String    @id @default(uuid())
+  // Organization info
+  orgName         String
+  orgType         String    // RESTAURANT, HOTEL, CAFE, EVENT, SCHOOL, HOSPITAL, OTHER
+  city            String    @default("Addis Ababa")
+  contactName     String
+  phone           String
+  email           String?
+  // Order details
+  items           Json      // [{ product, quantity, unit, notes }]
+  totalEstimate   Float?
+  deliveryDate    DateTime?
+  isRecurring     Boolean   @default(false)
+  recurringFreq   String?   // WEEKLY, BIWEEKLY, MONTHLY
+  // Quote & payment
+  quotedPrice     Float?
+  quotedBy        String?
+  paymentMethod   String?
+  paymentStatus   String    @default("PENDING")
+  // Status
+  status          String    @default("PENDING") // PENDING, QUOTED, CONFIRMED, PROCESSING, DELIVERED, CANCELLED
+  notes           String?
+  adminNotes      String?
+  // Language preference
+  language        String    @default("en")
+  // Linked order (after confirmation)
+  orderId         String?
+  userId          String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([status])
+  @@index([orgType])
+  @@index([city])
+  @@map("bulk_orders")
+}
+
+// ===== PRICE ALERT (Telegram) =====
+model PriceAlert {
+  id          String   @id @default(uuid())
+  chatId      String
+  productId   String
+  targetPrice Float
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([chatId, productId])
+  @@index([isActive])
+  @@map("price_alerts")
+}
+
+// ===== DISPUTE & RESOLUTION =====
+model Dispute {
+  id          String    @id @default(uuid())
+  orderId     String    @unique
+  buyerId     String
+  sellerId    String
+  reason      String    // ITEM_NOT_RECEIVED|NOT_AS_DESCRIBED|DAMAGED|WRONG_ITEM|OTHER
+  description String
+  evidence    String[]
+  status      String    @default("OPEN") // OPEN|SELLER_RESPONDED|ADMIN_REVIEW|RESOLVED|CLOSED
+  resolution  String?   // FULL_REFUND|PARTIAL_REFUND|NO_REFUND|REPLACEMENT
+  resolvedBy  String?
+  resolvedAt  DateTime?
+  deadline    DateTime
+  notes       String?
+  messages    DisputeMessage[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([status])
+  @@map("disputes")
+}
+
+model DisputeMessage {
+  id          String   @id @default(uuid())
+  disputeId   String
+  senderId    String
+  role        String   // BUYER|SELLER|ADMIN
+  content     String
+  attachments String[]
+  createdAt   DateTime @default(now())
+  dispute     Dispute  @relation(fields: [disputeId], references: [id], onDelete: Cascade)
+  @@map("dispute_messages")
+}
+
+// ===== SELLER KYC =====
+model SellerKYC {
+  id              String    @id @default(uuid())
+  sellerId        String    @unique
+  fullName        String
+  nationalIdNo    String
+  nationalIdImage String
+  businessLicense String?
+  taxId           String?
+  bankStatement   String?
+  selfieWithId    String?
+  status          String    @default("PENDING") // PENDING|APPROVED|REJECTED|EXPIRED
+  rejectionReason String?
+  verifiedBy      String?
+  verifiedAt      DateTime?
+  expiresAt       DateTime?
+  createdAt       DateTime  @default(now())
+  @@map("seller_kyc")
+}
+
+// ===== REVIEW ENHANCEMENTS =====
+model ReviewVote {
+  id        String   @id @default(uuid())
+  reviewId  String
+  userId    String
+  isHelpful Boolean
+  createdAt DateTime @default(now())
+
+  review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@unique([reviewId, userId])
+  @@map("review_votes")
+}
+
+// ===== DELIVERY ZONE =====
+model DeliveryZone {
+  id       String  @id @default(uuid())
+  fromCity String
+  toCity   String
+  minDays  Int
+  maxDays  Int
+  baseFee  Float
+  isActive Boolean @default(true)
+  @@unique([fromCity, toCity])
+  @@map("delivery_zones")
+}
+
+// ===== PROOF OF DELIVERY =====
+model ProofOfDelivery {
+  id         String   @id @default(uuid())
+  deliveryId String   @unique
+  photoUrl   String
+  signature  String?
+  latitude   Float?
+  longitude  Float?
+  capturedAt DateTime @default(now())
+  @@map("proof_of_delivery")
+}
+
+// ===== REFERRAL =====
+model Referral {
+  id         String   @id @default(uuid())
+  referrerId String
+  refereeId  String
+  code       String   @unique
+  reward     Float    @default(50)
+  status     String   @default("PENDING") // PENDING|REWARDED
+  createdAt  DateTime @default(now())
+  @@map("referrals")
+}
+
+// ===== ANALYTICS EVENT =====
+model AnalyticsEvent {
+  id        String   @id @default(uuid())
+  type      String
+  userId    String?
+  sessionId String?
+  productId String?
+  sellerId  String?
+  meta      Json?
+  city      String?
+  device    String?
+  createdAt DateTime @default(now())
+  @@index([type, createdAt])
+  @@index([userId, createdAt])
+  @@index([productId, createdAt])
+  @@map("analytics_events")
+}
+
+// ===== SEARCH CLICK (for click-based ranking feedback loop) =====
+model SearchClick {
+  id        String   @id @default(uuid())
+  query     String
+  productId String
+  userId    String?
+  position  Int      // position in results when clicked (1-based)
+  sessionId String?
+  city      String?
+  createdAt DateTime @default(now())
+  @@index([query, createdAt])
+  @@index([productId, createdAt])
+  @@map("search_clicks")
+}
+
+// ===== CAMPAIGN / FLASH SALE =====
+model Campaign {
+  id          String   @id @default(uuid())
+  name        String
+  type        String   // FLASH_SALE|BUNDLE|BOGO|REFERRAL|LOYALTY_REDEEM
+  startsAt    DateTime
+  endsAt      DateTime
+  rules       Json     // { minQty, minAmount, productIds, categoryIds }
+  discount    Json     // { type: PERCENT|FIXED|FREE_SHIPPING, value }
+  maxUses     Int?
+  usedCount   Int      @default(0)
+  isActive    Boolean  @default(true)
+  sellerId    String?
+  createdAt   DateTime @default(now())
+  @@index([isActive, startsAt, endsAt])
+  @@map("campaigns")
+}
+
+// ===== SELLER ADS =====
+model Ad {
+  id          String   @id @default(uuid())
+  sellerId    String
+  productId   String?
+  type        String   // SPONSORED_PRODUCT|BANNER|CATEGORY_TOP
+  placement   String   // SEARCH_TOP|HOMEPAGE|CATEGORY_PAGE|PRODUCT_PAGE
+  budget      Float
+  dailyBudget Float    @default(0)
+  bidPerClick Float    @default(1)
+  spent       Float    @default(0)
+  clicks      Int      @default(0)
+  impressions Int      @default(0)
+  status      String   @default("ACTIVE") // ACTIVE|PAUSED|EXHAUSTED
+  startsAt    DateTime @default(now())
+  endsAt      DateTime?
+  createdAt   DateTime @default(now())
+  seller      Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  product     Product? @relation(fields: [productId], references: [id])
+  clicks_log  AdClick[]
+  @@index([status, placement])
+  @@map("ads")
+}
+
+model AdClick {
+  id        String   @id @default(uuid())
+  adId      String
+  userId    String?
+  ipAddress String
+  createdAt DateTime @default(now())
+  ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
+  @@index([adId, createdAt])
+  @@map("ad_clicks")
+}
+
+// ===== PRODUCT Q&A =====
+model ProductQA {
+  id         String   @id @default(uuid())
+  productId  String
+  userId     String
+  question   String
+  answer     String?
+  answeredBy String?  // sellerId
+  answeredAt DateTime?
+  isPublic   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  @@index([productId])
+  @@map("product_qa")
+}
+
+// ===== SELLER COLLECTIONS =====
+model SellerCollection {
+  id          String   @id @default(uuid())
+  sellerId    String
+  name        String
+  description String?
+  emoji       String?
+  productIds  String[]
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  @@index([sellerId])
+  @@map("seller_collections")
+}
+
+// ===== PRODUCT BUNDLES =====
+model ProductBundle {
+  id          String   @id @default(uuid())
+  sellerId    String
+  name        String
+  description String?
+  productIds  String[]
+  quantities  Json     // { productId: quantity }
+  bundlePrice Float
+  comparePrice Float?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  @@index([sellerId])
+  @@map("product_bundles")
+}
+
+// ===== SUBSCRIPTIONS (Auto-Reorder) =====
+model Subscription {
+  id          String   @id @default(uuid())
+  userId      String
+  productId   String
+  quantity    Float
+  frequency   String   // WEEKLY|BIWEEKLY|MONTHLY
+  nextOrderAt DateTime
+  isActive    Boolean  @default(true)
+  addressId   String?
+  paymentMethod String @default("CASH_ON_DELIVERY")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([userId])
+  @@index([nextOrderAt, isActive])
+  @@map("subscriptions")
+}
+
+// ===== SEASONAL ALERTS =====
+model SeasonalAlert {
+  id         String   @id @default(uuid())
+  userId     String
+  categoryId String?
+  keyword    String   // e.g. "mango", "teff harvest"
+  isActive   Boolean  @default(true)
+  notifiedAt DateTime?
+  createdAt  DateTime @default(now())
+  @@unique([userId, keyword])
+  @@index([isActive])
+  @@map("seasonal_alerts")
+}
+
+// ===== COOPERATIVE MEMBERS =====
+model CooperativeMember {
+  id         String   @id @default(uuid())
+  sellerId   String   // the cooperative seller account
+  userId     String   // the individual farmer
+  role       String   @default("MEMBER") // ADMIN|MEMBER
+  joinedAt   DateTime @default(now())
+  @@unique([sellerId, userId])
+  @@index([sellerId])
+  @@map("cooperative_members")
+}
+
+// ===== ABANDONED CART RECOVERY =====
+model AbandonedCart {
+  id          String   @id @default(uuid())
+  userId      String
+  items       Json     // snapshot of cart items
+  recoveryToken String @unique @default(uuid())
+  sentAt      DateTime?
+  recoveredAt DateTime?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  @@index([userId])
+  @@index([isActive, sentAt])
+  @@map("abandoned_carts")
+}
+
+// ===== BNPL INSTALLMENTS =====
+model BNPLPlan {
+  id            String   @id @default(uuid())
+  orderId       String   @unique
+  userId        String
+  totalAmount   Float
+  installments  Int      @default(2)
+  paidCount     Int      @default(0)
+  nextDueAt     DateTime
+  status        String   @default("ACTIVE") // ACTIVE|COMPLETED|DEFAULTED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  payments      BNPLPayment[]
+  @@index([userId])
+  @@index([nextDueAt, status])
+  @@map("bnpl_plans")
+}
+
+model BNPLPayment {
+  id        String   @id @default(uuid())
+  planId    String
+  amount    Float
+  dueAt     DateTime
+  paidAt    DateTime?
+  status    String   @default("PENDING") // PENDING|PAID|OVERDUE
+  plan      BNPLPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  @@map("bnpl_payments")
+}
+
+// ===== SELLER TIER =====
+model SellerTier {
+  id         String   @id @default(uuid())
+  sellerId   String   @unique
+  tier       String   @default("BRONZE") // BRONZE|SILVER|GOLD|PLATINUM
+  score      Float    @default(0)
+  updatedAt  DateTime @updatedAt
+  @@map("seller_tiers")
+}
+
+// ===== PICKUP STATIONS =====
+model PickupStation {
+  id          String   @id @default(uuid())
+  name        String
+  address     String
+  city        String
+  phone       String?
+  latitude    Float?
+  longitude   Float?
+  isActive    Boolean  @default(true)
+  openHours   String?  // e.g. "8am-8pm"
+  createdAt   DateTime @default(now())
+  @@index([city])
+  @@map("pickup_stations")
+}
+
+// ===== AFFILIATE PROGRAM =====
+model Affiliate {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  code        String   @unique
+  commission  Float    @default(0.03) // 3%
+  totalEarned Float    @default(0)
+  totalClicks Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  clicks      AffiliateClick[]
+  @@map("affiliates")
+}
+
+model AffiliateClick {
+  id          String   @id @default(uuid())
+  affiliateId String
+  productId   String?
+  orderId     String?
+  commission  Float    @default(0)
+  createdAt   DateTime @default(now())
+  affiliate   Affiliate @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  @@index([affiliateId])
+  @@map("affiliate_clicks")
+}
+
+// ===== DAILY CHECK-IN =====
+model DailyCheckIn {
+  id        String   @id @default(uuid())
+  userId    String
+  streak    Int      @default(1)
+  lastDate  DateTime @default(now())
+  totalDays Int      @default(1)
+  @@unique([userId])
+  @@map("daily_checkins")
+}
+
+// ===== WISHLIST SHARING =====
+model SharedWishlist {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  description String?
+  shareToken  String   @unique @default(uuid())
+  productIds  String[]
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  @@index([userId])
+  @@map("shared_wishlists")
+}
+
+// ===== COMMUNITY FORUM =====
+model ForumPost {
+  id          String   @id @default(uuid())
+  userId      String
+  title       String
+  content     String
+  category    String   @default("GENERAL") // GENERAL|FARMING_TIPS|MARKET_PRICES|WEATHER|PEST_CONTROL
+  tags        String[]
+  likes       Int      @default(0)
+  views       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  replies     ForumReply[]
+  @@index([category])
+  @@index([createdAt])
+  @@map("forum_posts")
+}
+
+model ForumReply {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String
+  content   String
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+  post      ForumPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  @@index([postId])
+  @@map("forum_replies")
+}
+
+// ===== MICRO INSURANCE =====
+model OrderInsurance {
+  id        String   @id @default(uuid())
+  orderId   String   @unique
+  userId    String
+  premium   Float    @default(5) // ETB 5
+  status    String   @default("ACTIVE") // ACTIVE|CLAIMED|EXPIRED
+  claimedAt DateTime?
+  claimReason String?
+  createdAt DateTime @default(now())
+  @@map("order_insurance")
+}
+
+// ===== LIVE SESSIONS =====
+model LiveSession {
+  id          String   @id @default(uuid())
+  sellerId    String
+  title       String
+  description String?
+  thumbnailUrl String?
+  streamUrl   String?
+  streamKey   String   @unique @default(uuid())
+  status      String   @default("SCHEDULED") // SCHEDULED|LIVE|ENDED
+  viewerCount Int      @default(0)
+  peakViewers Int      @default(0)
+  scheduledAt DateTime?
+  startedAt   DateTime?
+  endedAt     DateTime?
+  productIds  String[]
+  createdAt   DateTime @default(now())
+  @@index([sellerId])
+  @@index([status])
+  @@map("live_sessions")
+}
+
+// ===== ETHIOPIAN INTENT GRAPH (Self-learning COSMO) =====
+// Stores learned Amharic + Afaan Oromo query → product intent mappings
+// Grows automatically as users search — unlimited vocabulary
+model IntentGraphEntry {
+  id          String   @id @default(uuid())
+  query       String   @unique  // the search term (Amharic, Oromo, or English)
+  language    String   @default("am") // am=Amharic, om=Afaan Oromo, en=English, mixed
+  terms       String[] // product terms to search for
+  intent      String   // holiday, recipe, bulk, fasting, seasonal, etc.
+  boost       Int      @default(8)
+  source      String   @default("ai") // "seed" (hardcoded) | "ai" (Groq learned) | "admin" (manually added)
+  useCount    Int      @default(0)    // how many times this entry was used
+  confidence  Float    @default(0.8)  // 0-1, AI confidence score
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([query])
+  @@index([language])
+  @@index([intent])
+  @@index([useCount])
+  @@map("intent_graph_entries")
+}

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hafa Market App – Download Now</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="mobile-app.css" />
+  <link rel="stylesheet" href="mobile-app-2.css" />
+  <link rel="stylesheet" href="mobile-app-3.css" />
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="app-nav" id="appNav">
+  <div class="app-nav-inner">
+    <a href="index.html" class="app-logo">
+      <div class="app-logo-mark">🌿</div>
+      <div>
+        <span class="app-logo-name">Hafa <em>Market</em></span>
+        <span class="app-logo-sub">Mobile App</span>
+      </div>
+    </a>
+    <div class="app-nav-links" id="appNavLinks">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="index.html" class="nav-web-link">🌐 Web Version</a>
+    </div>
+    <div class="app-nav-ctas">
+      <a href="#download" class="nav-download-btn">
+        <i class="fas fa-download"></i> Download Free
+      </a>
+      <button class="app-hamburger" id="appHamburger" onclick="toggleAppNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="app-hero" id="home">
+  <div class="app-hero-bg">
+    <div class="ahb-circle c1"></div>
+    <div class="ahb-circle c2"></div>
+    <div class="ahb-circle c3"></div>
+    <div class="ahb-grid"></div>
+  </div>
+
+  <div class="app-hero-inner">
+    <!-- Left Content -->
+    <div class="app-hero-content">
+      <div class="app-hero-badge">
+        <span class="app-badge-icon">⭐</span>
+        <span>4.9 Rating · 50K+ Downloads · #1 AgriApp in Africa</span>
+      </div>
+      <h1>
+        Shop Fresh Farm Products
+        <span class="app-hero-gradient">Anytime, Anywhere</span>
+        From Your Phone
+      </h1>
+      <p>
+        The Hafa Market app brings thousands of fresh vegetables, fruits, grains, coffee, and more directly to your fingertips. Order in seconds, track in real-time, delivered to your door.
+      </p>
+
+      <div class="app-hero-stores">
+        <a href="#download" class="store-btn store-google">
+          <i class="fab fa-google-play"></i>
+          <div>
+            <span>Get it on</span>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+        <a href="#download" class="store-btn store-apple">
+          <i class="fab fa-apple"></i>
+          <div>
+            <span>Download on the</span>
+            <strong>App Store</strong>
+          </div>
+        </a>
+        <a href="#download" class="store-btn store-apk">
+          <i class="fas fa-download"></i>
+          <div>
+            <span>Direct</span>
+            <strong>APK Download</strong>
+          </div>
+        </a>
+      </div>
+
+      <div class="app-hero-stats">
+        <div class="ahs"><strong>50K+</strong><span>Downloads</span></div>
+        <div class="ahs-div"></div>
+        <div class="ahs"><strong>4.9★</strong><span>App Rating</span></div>
+        <div class="ahs-div"></div>
+        <div class="ahs"><strong>10K+</strong><span>Products</span></div>
+        <div class="ahs-div"></div>
+        <div class="ahs"><strong>30+</strong><span>Cities</span></div>
+      </div>
+
+      <div class="app-hero-platforms">
+        <span>Available on:</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/511px-Android_robot.svg.png" alt="Android" title="Android" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/505px-Apple_logo_black.svg.png" alt="iOS" title="iOS" style="filter:invert(1)" />
+        <span class="platform-tag">Android 6.0+</span>
+        <span class="platform-tag">iOS 13+</span>
+      </div>
+    </div>
+
+    <!-- Right — Phone Mockups -->
+    <div class="app-hero-phones">
+      <div class="phone-stack">
+        <!-- Back phone -->
+        <div class="phone-device phone-back">
+          <div class="phone-device-inner">
+            <div class="phone-notch-bar"></div>
+            <div class="phone-screen-content psc-orders">
+              <div class="psc-header" style="background:linear-gradient(135deg,#7b1fa2,#9c27b0)">
+                <span>📦 My Orders</span>
+              </div>
+              <div class="psc-order-item">
+                <span>🥬</span>
+                <div><b>Organic Kale</b><small>Delivered ✅</small></div>
+                <span class="psc-price">$2.49</span>
+              </div>
+              <div class="psc-order-item">
+                <span>☕</span>
+                <div><b>Ethiopian Coffee</b><small>On the way 🚚</small></div>
+                <span class="psc-price">$9.99</span>
+              </div>
+              <div class="psc-order-item">
+                <span>🍯</span>
+                <div><b>Pure Honey</b><small>Processing ⏳</small></div>
+                <span class="psc-price">$8.99</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Main phone -->
+        <div class="phone-device phone-main">
+          <div class="phone-device-inner">
+            <div class="phone-notch-bar"></div>
+            <div class="phone-screen-content psc-home">
+              <div class="psc-header">
+                <div>
+                  <div class="psc-greeting">Good Morning 👋</div>
+                  <div class="psc-user">Amina Hassan</div>
+                </div>
+                <div class="psc-cart-icon">🛒<span>3</span></div>
+              </div>
+              <div class="psc-search">🔍 Search fresh products...</div>
+              <div class="psc-banner">
+                <div class="psc-banner-text">
+                  <span>🔥 Flash Sale</span>
+                  <b>40% OFF Vegetables</b>
+                </div>
+                <span class="psc-banner-emoji">🥬</span>
+              </div>
+              <div class="psc-cats-row">
+                <div class="psc-cat"><span>🥬</span><small>Veggies</small></div>
+                <div class="psc-cat"><span>🍎</span><small>Fruits</small></div>
+                <div class="psc-cat"><span>🌾</span><small>Grains</small></div>
+                <div class="psc-cat"><span>☕</span><small>Coffee</small></div>
+                <div class="psc-cat"><span>🍯</span><small>Honey</small></div>
+              </div>
+              <div class="psc-section-title">Featured Products</div>
+              <div class="psc-products-row">
+                <div class="psc-product">
+                  <span>🥭</span>
+                  <div class="psc-prod-name">Mango</div>
+                  <div class="psc-prod-price">$4.49</div>
+                  <button class="psc-add">+</button>
+                </div>
+                <div class="psc-product">
+                  <span>🥚</span>
+                  <div class="psc-prod-name">Eggs x12</div>
+                  <div class="psc-prod-price">$3.99</div>
+                  <button class="psc-add">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Front phone -->
+        <div class="phone-device phone-front">
+          <div class="phone-device-inner">
+            <div class="phone-notch-bar"></div>
+            <div class="phone-screen-content psc-track">
+              <div class="psc-header" style="background:linear-gradient(135deg,#1b5e20,#2E7D32)">
+                <span>📍 Track Order</span>
+              </div>
+              <div class="psc-track-id">Order #HM-2026-0892</div>
+              <div class="psc-map-placeholder">
+                <span>🗺️</span>
+                <small>Live Map View</small>
+              </div>
+              <div class="psc-track-steps">
+                <div class="psc-ts done"><i class="fas fa-check-circle"></i> Order Placed</div>
+                <div class="psc-ts done"><i class="fas fa-check-circle"></i> Processing</div>
+                <div class="psc-ts active"><i class="fas fa-truck"></i> On the Way</div>
+                <div class="psc-ts"><i class="fas fa-home"></i> Delivered</div>
+              </div>
+              <div class="psc-eta">🕐 ETA: 25 minutes</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating badges -->
+        <div class="phone-badge pb-1">
+          <span>🚀</span>
+          <div><b>Fast Delivery</b><small>24–48 hrs</small></div>
+        </div>
+        <div class="phone-badge pb-2">
+          <span>🔒</span>
+          <div><b>Secure Pay</b><small>M-Pesa · Card</small></div>
+        </div>
+        <div class="phone-badge pb-3">
+          <span>⭐</span>
+          <div><b>4.9 Rating</b><small>50K reviews</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-hero-wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f8fafc"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== TRUST BAR ========== -->
+<div class="app-trust-bar">
+  <div class="app-trust-inner">
+    <div class="atb-item"><i class="fas fa-shield-halved"></i><span>Bank-level Security</span></div>
+    <div class="atb-sep"></div>
+    <div class="atb-item"><i class="fas fa-bolt"></i><span>Lightning Fast</span></div>
+    <div class="atb-sep"></div>
+    <div class="atb-item"><i class="fas fa-wifi"></i><span>Works Offline</span></div>
+    <div class="atb-sep"></div>
+    <div class="atb-item"><i class="fas fa-language"></i><span>6 Languages</span></div>
+    <div class="atb-sep"></div>
+    <div class="atb-item"><i class="fas fa-star"></i><span>4.9★ Rated</span></div>
+  </div>
+</div>
+
+<!-- ========== APP FEATURES ========== -->
+<section class="app-section" id="features">
+  <div class="app-container">
+    <div class="app-section-head centered">
+      <span class="app-label">Why You'll Love It</span>
+      <h2>Everything You Need in <span>One App</span></h2>
+      <p>Hafa Market app is built for speed, simplicity, and the African market</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fc-green">
+        <div class="fc-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Lightning Fast</h3>
+        <p>Browse 10,000+ products and checkout in under 60 seconds. Optimized for slow connections too.</p>
+      </div>
+      <div class="feature-card fc-orange">
+        <div class="fc-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>Real-Time Tracking</h3>
+        <p>Watch your order move from farm to your door on a live map. Get SMS & push notifications.</p>
+      </div>
+      <div class="feature-card fc-purple">
+        <div class="fc-icon"><i class="fas fa-mobile-screen"></i></div>
+        <h3>Works Offline</h3>
+        <p>Browse products, view your cart and orders even without internet. Syncs when you reconnect.</p>
+      </div>
+      <div class="feature-card fc-blue">
+        <div class="fc-icon"><i class="fas fa-wallet"></i></div>
+        <h3>Multiple Payments</h3>
+        <p>Pay with M-Pesa, MTN MoMo, Airtel Money, card, or cash on delivery. All in one tap.</p>
+      </div>
+      <div class="feature-card fc-teal">
+        <div class="fc-icon"><i class="fas fa-language"></i></div>
+        <h3>6 Languages</h3>
+        <p>Full support for English, አማርኛ, Afaan Oromoo, Kiswahili, Français, and العربية.</p>
+      </div>
+      <div class="feature-card fc-red">
+        <div class="fc-icon"><i class="fas fa-robot"></i></div>
+        <h3>AI Assistant</h3>
+        <p>Built-in Hafa AI helps you find products, track orders, and answers questions in your language.</p>
+      </div>
+      <div class="feature-card fc-yellow">
+        <div class="fc-icon"><i class="fas fa-bell"></i></div>
+        <h3>Smart Notifications</h3>
+        <p>Get alerts for price drops, flash sales, delivery updates, and new products from your favorite sellers.</p>
+      </div>
+      <div class="feature-card fc-indigo">
+        <div class="fc-icon"><i class="fas fa-store"></i></div>
+        <h3>Seller Dashboard</h3>
+        <p>Farmers can manage their store, list products, track sales, and receive payments — all from the app.</p>
+      </div>
+      <div class="feature-card fc-pink">
+        <div class="fc-icon"><i class="fas fa-heart"></i></div>
+        <h3>Wishlist & Reorder</h3>
+        <p>Save your favorite products and reorder your weekly groceries with a single tap.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SCREENSHOTS ========== -->
+<section class="app-section screenshots-section" id="screenshots">
+  <div class="app-container">
+    <div class="app-section-head centered">
+      <span class="app-label">App Preview</span>
+      <h2>Beautiful, <span>Intuitive Design</span></h2>
+      <p>Every screen crafted for the best shopping experience</p>
+    </div>
+    <div class="screenshots-tabs">
+      <button class="ss-tab active" onclick="switchSS(this,'home')">🏠 Home</button>
+      <button class="ss-tab" onclick="switchSS(this,'browse')">🔍 Browse</button>
+      <button class="ss-tab" onclick="switchSS(this,'product')">📦 Product</button>
+      <button class="ss-tab" onclick="switchSS(this,'cart')">🛒 Cart</button>
+      <button class="ss-tab" onclick="switchSS(this,'track')">📍 Track</button>
+      <button class="ss-tab" onclick="switchSS(this,'seller')">🌿 Seller</button>
+    </div>
+    <div class="screenshots-showcase">
+      <div class="ss-info" id="ssInfo">
+        <h3>Smart Home Feed</h3>
+        <p>Personalized product recommendations, flash deals, and your favorite categories — all on one beautiful home screen.</p>
+        <ul class="ss-features-list">
+          <li><i class="fas fa-check"></i> Personalized recommendations</li>
+          <li><i class="fas fa-check"></i> Flash sale countdown timers</li>
+          <li><i class="fas fa-check"></i> Quick reorder from history</li>
+          <li><i class="fas fa-check"></i> Live delivery tracking widget</li>
+        </ul>
+      </div>
+      <div class="ss-phones-row" id="ssPhonesRow">
+        <!-- Home screens -->
+        <div class="ss-phone ss-active" data-screen="home">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span class="ss-logo">🌿 Hafa</span><span>🛒</span></div>
+              <div class="ss-greeting">Good Morning, Amina 👋</div>
+              <div class="ss-search-bar">🔍 Search products...</div>
+              <div class="ss-promo">🔥 40% OFF Fresh Vegetables Today!</div>
+              <div class="ss-cats"><span>🥬</span><span>🍎</span><span>🌾</span><span>☕</span><span>🍯</span></div>
+              <div class="ss-title">Featured</div>
+              <div class="ss-prods">
+                <div class="ss-prod"><span>🥭</span><b>Mango</b><small>$4.49</small></div>
+                <div class="ss-prod"><span>🥚</span><b>Eggs</b><small>$3.99</small></div>
+              </div>
+              <div class="ss-title">Flash Sale ⚡</div>
+              <div class="ss-prods">
+                <div class="ss-prod"><span>☕</span><b>Coffee</b><small>$9.99</small></div>
+                <div class="ss-prod"><span>🍯</span><b>Honey</b><small>$8.99</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ss-phone ss-active" data-screen="home">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>← Back</span><span>🔔</span></div>
+              <div class="ss-title" style="padding:8px 10px">Today's Deals 🔥</div>
+              <div class="ss-deal-card" style="background:linear-gradient(135deg,#1b5e20,#2E7D32)">
+                <div><b style="color:#fff">Organic Vegetables</b><br><small style="color:rgba(255,255,255,.8)">Up to 40% OFF</small></div>
+                <span style="font-size:2rem">🥬</span>
+              </div>
+              <div class="ss-deal-card" style="background:linear-gradient(135deg,#bf360c,#e64a19);margin-top:8px">
+                <div><b style="color:#fff">Ethiopian Coffee</b><br><small style="color:rgba(255,255,255,.8)">Buy 2 Get 1 Free</small></div>
+                <span style="font-size:2rem">☕</span>
+              </div>
+              <div class="ss-deal-card" style="background:linear-gradient(135deg,#4a148c,#7b1fa2);margin-top:8px">
+                <div><b style="color:#fff">Pure Honey</b><br><small style="color:rgba(255,255,255,.8)">20% OFF Today</small></div>
+                <span style="font-size:2rem">🍯</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Browse screens -->
+        <div class="ss-phone" data-screen="browse">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>🔍 Browse</span><span>⚙️</span></div>
+              <div class="ss-search-bar">🔍 Search all products...</div>
+              <div class="ss-filter-row"><span class="ss-filter active">All</span><span class="ss-filter">Veggies</span><span class="ss-filter">Fruits</span><span class="ss-filter">Grains</span></div>
+              <div class="ss-grid-products">
+                <div class="ss-gp"><span>🥬</span><small>Kale</small><b>$2.49</b></div>
+                <div class="ss-gp"><span>🍅</span><small>Tomatoes</small><b>$1.99</b></div>
+                <div class="ss-gp"><span>🥕</span><small>Carrots</small><b>$1.49</b></div>
+                <div class="ss-gp"><span>🧅</span><small>Onions</small><b>$1.29</b></div>
+                <div class="ss-gp"><span>🥦</span><small>Broccoli</small><b>$2.99</b></div>
+                <div class="ss-gp"><span>🫑</span><small>Peppers</small><b>$2.19</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ss-phone" data-screen="browse">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>🔍 Search Results</span></div>
+              <div class="ss-search-bar" style="background:#e8f5e9;color:#2E7D32;font-weight:600">🔍 "mango"</div>
+              <div style="font-size:.65rem;color:#6b7280;padding:4px 8px">12 results found</div>
+              <div class="ss-list-product">
+                <span style="font-size:2rem">🥭</span>
+                <div><b>Sweet Mangoes 1kg</b><small>Kwame Farms · ⭐4.9</small><b style="color:#2E7D32">$4.49</b></div>
+              </div>
+              <div class="ss-list-product">
+                <span style="font-size:2rem">🥭</span>
+                <div><b>Dried Mango Slices</b><small>Fatima Fresh · ⭐4.7</small><b style="color:#2E7D32">$3.99</b></div>
+              </div>
+              <div class="ss-list-product">
+                <span style="font-size:2rem">🥭</span>
+                <div><b>Mango Juice 1L</b><small>Amina Harvest · ⭐4.6</small><b style="color:#2E7D32">$2.99</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Product screens -->
+        <div class="ss-phone" data-screen="product">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-prod-hero"><span>🥭</span></div>
+              <div style="padding:8px 10px">
+                <div style="font-size:.65rem;color:#9ca3af">Kwame Farms</div>
+                <div style="font-size:.85rem;font-weight:800;color:#374151">Sweet Mangoes 1kg</div>
+                <div style="color:#FFA726;font-size:.75rem">★★★★★ <span style="color:#9ca3af">(210)</span></div>
+                <div style="font-size:1.1rem;font-weight:900;color:#2E7D32">$4.49 <span style="font-size:.7rem;color:#9ca3af;text-decoration:line-through">$5.99</span></div>
+                <div style="font-size:.68rem;color:#6b7280;margin:6px 0">Fresh, sweet mangoes sourced directly from certified organic farms...</div>
+                <div class="ss-qty-row"><button>−</button><span>1</span><button>+</button></div>
+                <button class="ss-add-cart-btn">🛒 Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ss-phone" data-screen="product">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>⭐ Reviews</span></div>
+              <div class="ss-review-summary">
+                <div class="ss-big-rating">4.9</div>
+                <div><div style="color:#FFA726">★★★★★</div><small style="color:#9ca3af">210 reviews</small></div>
+              </div>
+              <div class="ss-review">
+                <div class="ss-rev-head"><span>👩🏾</span><b>Amina H.</b><span style="color:#FFA726">★★★★★</span></div>
+                <p>"Best mangoes I've ever had! So fresh and sweet."</p>
+              </div>
+              <div class="ss-review">
+                <div class="ss-rev-head"><span>👨🏿</span><b>Kwame A.</b><span style="color:#FFA726">★★★★★</span></div>
+                <p>"Delivered same day. Amazing quality!"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Cart screens -->
+        <div class="ss-phone" data-screen="cart">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>🛒 My Cart (3)</span></div>
+              <div class="ss-cart-item"><span>🥭</span><div><b>Mangoes 1kg</b><small>$4.49</small></div><div class="ss-qty-sm"><button>−</button><span>2</span><button>+</button></div></div>
+              <div class="ss-cart-item"><span>☕</span><div><b>Ethiopian Coffee</b><small>$9.99</small></div><div class="ss-qty-sm"><button>−</button><span>1</span><button>+</button></div></div>
+              <div class="ss-cart-item"><span>🍯</span><div><b>Pure Honey</b><small>$8.99</small></div><div class="ss-qty-sm"><button>−</button><span>1</span><button>+</button></div></div>
+              <div class="ss-promo-input">🎁 Promo code: HAFA10</div>
+              <div class="ss-cart-total"><span>Total</span><b>$28.46</b></div>
+              <button class="ss-checkout-btn">Checkout →</button>
+            </div>
+          </div>
+        </div>
+        <div class="ss-phone" data-screen="cart">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>💳 Payment</span></div>
+              <div class="ss-pay-option active"><i class="fab fa-google-pay" style="font-size:1.2rem"></i> M-Pesa</div>
+              <div class="ss-pay-option"><i class="fas fa-credit-card"></i> Credit Card</div>
+              <div class="ss-pay-option"><i class="fas fa-money-bill"></i> Cash on Delivery</div>
+              <div class="ss-pay-option"><i class="fab fa-paypal"></i> PayPal</div>
+              <div class="ss-order-summary">
+                <div class="ss-os-row"><span>Subtotal</span><span>$28.46</span></div>
+                <div class="ss-os-row"><span>Delivery</span><span style="color:#2E7D32">FREE</span></div>
+                <div class="ss-os-row"><span>Discount</span><span style="color:#e53935">-$2.85</span></div>
+                <div class="ss-os-row" style="font-weight:800"><span>Total</span><span style="color:#2E7D32">$25.61</span></div>
+              </div>
+              <button class="ss-checkout-btn">Place Order 🎉</button>
+            </div>
+          </div>
+        </div>
+        <!-- Track screens -->
+        <div class="ss-phone" data-screen="track">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>📍 Live Tracking</span></div>
+              <div class="ss-map"><span>🗺️</span><small>Live Map</small><div class="ss-map-pin">📍</div></div>
+              <div class="ss-track-steps">
+                <div class="ss-ts done"><i class="fas fa-check-circle"></i> Order Placed</div>
+                <div class="ss-ts done"><i class="fas fa-check-circle"></i> Processing</div>
+                <div class="ss-ts active"><i class="fas fa-truck"></i> On the Way</div>
+                <div class="ss-ts"><i class="fas fa-home"></i> Delivered</div>
+              </div>
+              <div class="ss-eta-bar">🕐 Arriving in <b>25 minutes</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="ss-phone" data-screen="track">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr"><span>📦 Order History</span></div>
+              <div class="ss-order-card done"><div><b>Order #HM-0891</b><small>Delivered · Jan 10</small></div><span style="color:#2E7D32;font-weight:700">$15.96</span></div>
+              <div class="ss-order-card active"><div><b>Order #HM-0892</b><small>On the way 🚚</small></div><span style="color:#FFA726;font-weight:700">$28.46</span></div>
+              <div class="ss-order-card"><div><b>Order #HM-0890</b><small>Delivered · Jan 8</small></div><span style="color:#2E7D32;font-weight:700">$22.10</span></div>
+              <button class="ss-reorder-btn">🔄 Reorder Last</button>
+            </div>
+          </div>
+        </div>
+        <!-- Seller screens -->
+        <div class="ss-phone" data-screen="seller">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr" style="background:linear-gradient(135deg,#1b5e20,#2E7D32);color:#fff"><span>🌿 My Store</span><span>+</span></div>
+              <div class="ss-seller-stats">
+                <div class="ss-stat"><b>$1,240</b><small>This Month</small></div>
+                <div class="ss-stat"><b>48</b><small>Orders</small></div>
+                <div class="ss-stat"><b>4.9★</b><small>Rating</small></div>
+              </div>
+              <div class="ss-title">My Products</div>
+              <div class="ss-seller-prod"><span>🥬</span><div><b>Organic Kale</b><small>Stock: 50kg</small></div><span style="color:#2E7D32;font-weight:700">$2.49</span></div>
+              <div class="ss-seller-prod"><span>🍅</span><div><b>Tomatoes</b><small>Stock: 30kg</small></div><span style="color:#2E7D32;font-weight:700">$1.99</span></div>
+              <div class="ss-seller-prod"><span>☕</span><div><b>Coffee 500g</b><small>Stock: 20 bags</small></div><span style="color:#2E7D32;font-weight:700">$9.99</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ss-phone" data-screen="seller">
+          <div class="ss-phone-inner">
+            <div class="ss-notch"></div>
+            <div class="ss-screen">
+              <div class="ss-hdr" style="background:linear-gradient(135deg,#1b5e20,#2E7D32);color:#fff"><span>📊 Analytics</span></div>
+              <div class="ss-chart-placeholder"><span>📈</span><small>Sales Chart</small></div>
+              <div class="ss-analytics-row"><span>Today's Revenue</span><b style="color:#2E7D32">$124.50</b></div>
+              <div class="ss-analytics-row"><span>New Orders</span><b style="color:#FFA726">8</b></div>
+              <div class="ss-analytics-row"><span>Top Product</span><b>Ethiopian Coffee</b></div>
+              <div class="ss-analytics-row"><span>Pending Payout</span><b style="color:#7b1fa2">$890.00</b></div>
+              <button class="ss-payout-btn">💰 Request Payout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="app-section hiw-section" id="how-it-works">
+  <div class="app-container">
+    <div class="app-section-head centered">
+      <span class="app-label">Simple Process</span>
+      <h2>Up & Running in <span>3 Minutes</span></h2>
+      <p>From download to your first order — it's that easy</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-step-num">01</div>
+        <div class="hiw-step-icon">📲</div>
+        <h3>Download the App</h3>
+        <p>Get Hafa Market free from Google Play or App Store. Takes less than 30 seconds to install.</p>
+      </div>
+      <div class="hiw-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="hiw-step">
+        <div class="hiw-step-num">02</div>
+        <div class="hiw-step-icon">👤</div>
+        <h3>Create Your Account</h3>
+        <p>Sign up with your phone number or email. Verify in seconds and set your delivery location.</p>
+      </div>
+      <div class="hiw-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="hiw-step">
+        <div class="hiw-step-num">03</div>
+        <div class="hiw-step-icon">🛒</div>
+        <h3>Browse & Order</h3>
+        <p>Search or browse 10,000+ products. Add to cart and checkout in under 60 seconds.</p>
+      </div>
+      <div class="hiw-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="hiw-step">
+        <div class="hiw-step-num">04</div>
+        <div class="hiw-step-icon">📦</div>
+        <h3>Track & Receive</h3>
+        <p>Watch your order on a live map. Get push notifications and receive fresh products at your door.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMPARISON ========== -->
+<section class="app-section compare-section">
+  <div class="app-container">
+    <div class="app-section-head centered">
+      <span class="app-label">Why Hafa App?</span>
+      <h2>Hafa Market vs <span>Traditional Shopping</span></h2>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="th-hafa">🌿 Hafa Market App</th>
+            <th>Traditional Market</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Order from home</td><td class="td-yes"><i class="fas fa-check-circle"></i> Yes</td><td class="td-no"><i class="fas fa-times-circle"></i> No</td></tr>
+          <tr><td>Real-time price comparison</td><td class="td-yes"><i class="fas fa-check-circle"></i> Yes</td><td class="td-no"><i class="fas fa-times-circle"></i> No</td></tr>
+          <tr><td>Delivery to your door</td><td class="td-yes"><i class="fas fa-check-circle"></i> 24–48 hrs</td><td class="td-no"><i class="fas fa-times-circle"></i> Self-pickup</td></tr>
+          <tr><td>Verified product quality</td><td class="td-yes"><i class="fas fa-check-circle"></i> Certified</td><td class="td-no"><i class="fas fa-times-circle"></i> Uncertain</td></tr>
+          <tr><td>Mobile money payment</td><td class="td-yes"><i class="fas fa-check-circle"></i> M-Pesa, MTN</td><td class="td-no"><i class="fas fa-times-circle"></i> Cash only</td></tr>
+          <tr><td>Order tracking</td><td class="td-yes"><i class="fas fa-check-circle"></i> Live map</td><td class="td-no"><i class="fas fa-times-circle"></i> No</td></tr>
+          <tr><td>24/7 availability</td><td class="td-yes"><i class="fas fa-check-circle"></i> Always open</td><td class="td-no"><i class="fas fa-times-circle"></i> Limited hours</td></tr>
+          <tr><td>Price transparency</td><td class="td-yes"><i class="fas fa-check-circle"></i> Fixed prices</td><td class="td-no"><i class="fas fa-times-circle"></i> Negotiation</td></tr>
+          <tr><td>Bulk discounts</td><td class="td-yes"><i class="fas fa-check-circle"></i> Automatic</td><td class="td-no"><i class="fas fa-times-circle"></i> Rare</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REVIEWS ========== -->
+<section class="app-section reviews-section" id="reviews">
+  <div class="app-container">
+    <div class="app-section-head centered">
+      <span class="app-label">User Reviews</span>
+      <h2>Loved by <span>50,000+ Users</span></h2>
+      <div class="overall-rating">
+        <div class="or-score">4.9</div>
+        <div>
+          <div class="or-stars">★★★★★</div>
+          <div class="or-count">Based on 50,000+ reviews</div>
+          <div class="or-bars">
+            <div class="or-bar"><span>5★</span><div class="orb-track"><div class="orb-fill" style="width:88%"></div></div><span>88%</span></div>
+            <div class="or-bar"><span>4★</span><div class="orb-track"><div class="orb-fill" style="width:8%"></div></div><span>8%</span></div>
+            <div class="or-bar"><span>3★</span><div class="orb-track"><div class="orb-fill" style="width:3%"></div></div><span>3%</span></div>
+            <div class="or-bar"><span>2★</span><div class="orb-track"><div class="orb-fill" style="width:1%"></div></div><span>1%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card rc-featured">
+        <div class="rc-store"><i class="fab fa-google-play"></i> Google Play</div>
+        <div class="rc-stars">★★★★★</div>
+        <p>"This app has completely changed how I shop for groceries. The quality of products is amazing and delivery is always on time. The AI assistant is incredibly helpful!"</p>
+        <div class="rc-author"><span class="rc-av">👩🏾</span><div><strong>Amina Hassan</strong><span>Nairobi, Kenya · Verified Buyer</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-store"><i class="fab fa-google-play"></i> Google Play</div>
+        <div class="rc-stars">★★★★★</div>
+        <p>"As a farmer, this app gave me direct access to thousands of buyers. My income increased by 40% in just 3 months. Best decision I ever made!"</p>
+        <div class="rc-author"><span class="rc-av">👨🏿</span><div><strong>Kwame Asante</strong><span>Accra, Ghana · Verified Seller</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-store"><i class="fab fa-apple"></i> App Store</div>
+        <div class="rc-stars">★★★★★</div>
+        <p>"The Ethiopian coffee selection is incredible! I can order fresh roasted coffee from local farmers and it arrives the next day. Absolutely love this app."</p>
+        <div class="rc-author"><span class="rc-av">👩🏿</span><div><strong>Tigist Bekele</strong><span>Addis Ababa, Ethiopia · Verified Buyer</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-store"><i class="fab fa-google-play"></i> Google Play</div>
+        <div class="rc-stars">★★★★★</div>
+        <p>"The live tracking feature is amazing. I can see exactly where my order is on the map. The app works great even on slow internet connections."</p>
+        <div class="rc-author"><span class="rc-av">👨🏽</span><div><strong>Ibrahim Musa</strong><span>Lagos, Nigeria · Verified Buyer</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-store"><i class="fab fa-apple"></i> App Store</div>
+        <div class="rc-stars">★★★★★</div>
+        <p>"The Amharic language support is perfect! Finally an app that speaks my language. The ዶሮ ወጥ ready meals section is a lifesaver for busy days."</p>
+        <div class="rc-author"><span class="rc-av">👩🏾</span><div><strong>Hiwot Tadesse</strong><span>Addis Ababa, Ethiopia · Verified Buyer</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-store"><i class="fab fa-google-play"></i> Google Play</div>
+        <div class="rc-stars">★★★★★</div>
+        <p>"M-Pesa integration works flawlessly. I pay in seconds and the order is confirmed immediately. The seller dashboard is also very easy to use."</p>
+        <div class="rc-author"><span class="rc-av">👨🏾</span><div><strong>Fatima Diallo</strong><span>Dakar, Senegal · Verified Seller</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="app-section faq-section" id="faq">
+  <div class="app-container">
+    <div class="app-section-head centered">
+      <span class="app-label">Got Questions?</span>
+      <h2>Frequently Asked <span>Questions</span></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-col">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>Is the app free to download?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">Yes! Hafa Market is completely free to download and use. No subscription fees. You only pay for the products you order.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>Which countries is the app available in?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">Currently available in Kenya, Ghana, Nigeria, Ethiopia, Senegal, and expanding to more African countries. Check the app for your city coverage.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>What payment methods are supported?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">We support M-Pesa, MTN MoMo, Airtel Money, Credit/Debit Cards, PayPal, and Cash on Delivery. More payment options are being added regularly.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>How fast is delivery?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">Standard delivery is 24–48 hours. Express delivery (same day) is available in select cities. You can track your order live on the map.</div>
+        </div>
+      </div>
+      <div class="faq-col">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>Can I sell my farm products on the app?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">Absolutely! Register as a seller, verify your identity, and start listing your products. You'll get access to 50,000+ buyers and a full seller dashboard.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>Does the app work offline?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">Yes! You can browse previously loaded products, view your cart, and check order history offline. The app syncs automatically when you reconnect.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>What languages does the app support?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">The app supports English, አማርኛ (Amharic), Afaan Oromoo, Kiswahili, Français, and العربية. More languages coming soon.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span>How do I return a product?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a">Go to My Orders, select the order, tap "Return Item" and follow the steps. We have a 7-day return policy with full refunds processed in 3–5 business days.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DOWNLOAD CTA ========== -->
+<section class="app-download-section" id="download">
+  <div class="app-download-bg">
+    <div class="adb-blob b1"></div>
+    <div class="adb-blob b2"></div>
+  </div>
+  <div class="app-container app-download-inner">
+    <div class="app-download-content">
+      <div class="app-download-badge">🚀 Free Download · No Credit Card Required</div>
+      <h2>Download Hafa Market App <span>Today</span></h2>
+      <p>Join 50,000+ farmers and buyers already using Hafa Market. Fresh products, fast delivery, and the best prices — all in your pocket.</p>
+      <div class="download-store-btns">
+        <a href="#" class="dl-btn dl-google">
+          <i class="fab fa-google-play"></i>
+          <div><span>Get it on</span><strong>Google Play</strong></div>
+          <div class="dl-badge">Free</div>
+        </a>
+        <a href="#" class="dl-btn dl-apple">
+          <i class="fab fa-apple"></i>
+          <div><span>Download on the</span><strong>App Store</strong></div>
+          <div class="dl-badge">Free</div>
+        </a>
+        <a href="#" class="dl-btn dl-apk">
+          <i class="fas fa-download"></i>
+          <div><span>Direct APK</span><strong>Android Download</strong></div>
+          <div class="dl-badge">v2.1</div>
+        </a>
+      </div>
+      <div class="download-qr-row">
+        <div class="qr-box">
+          <div class="qr-placeholder">
+            <div class="qr-inner">
+              <div class="qr-pattern"></div>
+              <span>📱</span>
+            </div>
+          </div>
+          <p>Scan to download<br><small>Android & iOS</small></p>
+        </div>
+        <div class="download-stats">
+          <div class="dl-stat"><strong>50K+</strong><span>Downloads</span></div>
+          <div class="dl-stat"><strong>4.9★</strong><span>Rating</span></div>
+          <div class="dl-stat"><strong>10MB</strong><span>App Size</span></div>
+          <div class="dl-stat"><strong>Free</strong><span>Forever</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="app-download-phone">
+      <div class="dl-phone-device">
+        <div class="dl-phone-inner">
+          <div class="dl-notch"></div>
+          <div class="dl-screen">
+            <div class="dl-splash">
+              <div class="dl-splash-logo">🌿</div>
+              <div class="dl-splash-name">Hafa Market</div>
+              <div class="dl-splash-sub">Farm Fresh Delivered</div>
+              <div class="dl-splash-loader"><div class="dl-loader-bar"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="app-footer">
+  <div class="app-container app-footer-inner">
+    <div class="app-footer-brand">
+      <a href="index.html" class="app-logo" style="margin-bottom:12px">
+        <div class="app-logo-mark">🌿</div>
+        <div>
+          <span class="app-logo-name" style="color:#fff">Hafa <em>Market</em></span>
+          <span class="app-logo-sub" style="color:rgba(255,255,255,.5)">Mobile App</span>
+        </div>
+      </a>
+      <p>Africa's #1 agricultural marketplace app. Connecting farmers and buyers across the continent.</p>
+      <div class="app-footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="app-footer-col">
+      <h4>App</h4>
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="app-footer-col">
+      <h4>Download</h4>
+      <a href="#download"><i class="fab fa-google-play"></i> Google Play</a>
+      <a href="#download"><i class="fab fa-apple"></i> App Store</a>
+      <a href="#download"><i class="fas fa-download"></i> APK Download</a>
+    </div>
+    <div class="app-footer-col">
+      <h4>Company</h4>
+      <a href="index.html">Web Version</a>
+      <a href="#">About Us</a>
+      <a href="#">Become a Seller</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+  <div class="app-footer-bottom">
+    <div class="app-container">
+      <p>© 2026 Hafa Market. All rights reserved. Made with 💚 for African Farmers & Buyers.</p>
+      <div class="app-footer-stores">
+        <a href="#download"><i class="fab fa-google-play"></i> Google Play</a>
+        <a href="#download"><i class="fab fa-apple"></i> App Store</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="app-back-top" id="appBackTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script src="mobile-app.js"></script>
+</body>
+</html>

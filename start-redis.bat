@@ -1,0 +1,3 @@
+@echo off
+echo Starting Redis for Hafa Market...
+C:\Users\PC\redis\redis-server.exe --port 6379 --loglevel notice --daemonize no

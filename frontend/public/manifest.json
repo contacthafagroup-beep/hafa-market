@@ -1,0 +1,15 @@
+{
+  "name": "Hafa Market",
+  "short_name": "Hafa",
+  "description": "Farm fresh agricultural marketplace — Ethiopia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2E7D32",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "categories": ["shopping", "food"],
+  "lang": "en"
+}

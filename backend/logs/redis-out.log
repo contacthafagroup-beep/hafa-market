@@ -1,0 +1,205 @@
+[9672] 09 Apr 10:10:40.801 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[9672] 09 Apr 10:10:40.801 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=9672, just started
+[9672] 09 Apr 10:10:40.801 # Configuration loaded
+[9672] 09 Apr 10:10:40.809 * Running mode=standalone, port=6379.
+[9672] 09 Apr 10:10:40.809 # Server initialized
+[9672] 09 Apr 10:10:40.809 * Ready to accept connections
+[9672] 09 Apr 23:26:09.433 * 1000 changes in 60 seconds. Saving...
+[9672] 09 Apr 23:26:09.467 * Background saving started by pid 14512
+[9672] 09 Apr 23:26:10.229 # fork operation complete
+[9672] 09 Apr 23:26:10.254 * Background saving terminated with success
+[9672] 10 Apr 02:00:00.616 * 1000 changes in 60 seconds. Saving...
+[9672] 10 Apr 02:00:00.629 * Background saving started by pid 8552
+[9672] 10 Apr 02:00:01.072 # fork operation complete
+[9672] 10 Apr 02:00:01.108 * Background saving terminated with success
+[9672] 10 Apr 11:34:50.828 * 1000 changes in 60 seconds. Saving...
+[9672] 10 Apr 11:34:50.844 * Background saving started by pid 31656
+[9672] 10 Apr 11:34:51.279 # fork operation complete
+[9672] 10 Apr 11:34:51.294 * Background saving terminated with success
+[9672] 11 Apr 04:40:20.493 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 04:40:20.531 * Background saving started by pid 9376
+[9672] 11 Apr 04:40:21.067 # fork operation complete
+[9672] 11 Apr 04:40:21.111 * Background saving terminated with success
+[9672] 11 Apr 05:17:59.035 * Asynchronous AOF fsync is taking too long (disk is busy?). Writing the AOF buffer without waiting for fsync to complete, this may slow down Redis.
+[9672] 11 Apr 06:19:27.075 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 06:19:27.114 * Background saving started by pid 34648
+[9672] 11 Apr 06:19:27.434 # fork operation complete
+[9672] 11 Apr 06:19:27.473 * Background saving terminated with success
+[9672] 11 Apr 10:16:31.496 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 10:16:31.543 * Background saving started by pid 21872
+[9672] 11 Apr 10:16:32.308 # fork operation complete
+[9672] 11 Apr 10:16:32.347 * Background saving terminated with success
+[9672] 11 Apr 12:03:51.357 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 12:03:51.407 * Background saving started by pid 7752
+[9672] 11 Apr 12:03:52.386 # fork operation complete
+[9672] 11 Apr 12:03:52.441 * Background saving terminated with success
+[9672] 11 Apr 13:27:00.051 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 13:27:00.064 * Background saving started by pid 18144
+[9672] 11 Apr 13:27:00.508 # fork operation complete
+[9672] 11 Apr 13:27:00.548 * Background saving terminated with success
+[9672] 11 Apr 14:53:08.281 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 14:53:08.307 * Background saving started by pid 22620
+[9672] 11 Apr 14:53:08.640 # fork operation complete
+[9672] 11 Apr 14:53:08.685 * Background saving terminated with success
+[9672] 11 Apr 16:30:00.758 * 1000 changes in 60 seconds. Saving...
+[9672] 11 Apr 16:30:00.789 * Background saving started by pid 11908
+[9672] 11 Apr 16:30:01.117 # fork operation complete
+[9672] 11 Apr 16:30:01.145 * Background saving terminated with success
+[9672] 12 Apr 04:09:31.299 * 1000 changes in 60 seconds. Saving...
+[9672] 12 Apr 04:09:31.333 * Background saving started by pid 25428
+[9672] 12 Apr 04:09:31.768 # fork operation complete
+[9672] 12 Apr 04:09:31.787 * Background saving terminated with success
+[9672] 12 Apr 05:03:43.515 * Asynchronous AOF fsync is taking too long (disk is busy?). Writing the AOF buffer without waiting for fsync to complete, this may slow down Redis.
+[21912] 12 Apr 05:38:35.767 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[21912] 12 Apr 05:38:35.767 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=21912, just started
+[21912] 12 Apr 05:38:35.767 # Configuration loaded
+[21912] 12 Apr 05:38:35.775 * Running mode=standalone, port=6379.
+[21912] 12 Apr 05:38:35.775 # Server initialized
+[21912] 12 Apr 05:38:36.403 * DB loaded from append only file: 0.627 seconds
+[21912] 12 Apr 05:38:36.403 * Ready to accept connections
+[21912] 12 Apr 05:39:36.004 * 1000 changes in 60 seconds. Saving...
+[21912] 12 Apr 05:39:36.012 * Background saving started by pid 20528
+[21912] 12 Apr 05:39:36.660 # fork operation complete
+[21912] 12 Apr 05:39:36.692 * Background saving terminated with success
+[15688] 12 Apr 23:47:12.749 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[15688] 12 Apr 23:47:12.749 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=15688, just started
+[15688] 12 Apr 23:47:12.749 # Configuration loaded
+[15688] 12 Apr 23:47:12.757 * Running mode=standalone, port=6379.
+[15688] 12 Apr 23:47:12.757 # Server initialized
+[15688] 12 Apr 23:47:13.336 * DB loaded from append only file: 0.579 seconds
+[15688] 12 Apr 23:47:13.336 * Ready to accept connections
+[15688] 12 Apr 23:48:13.076 * 1000 changes in 60 seconds. Saving...
+[15688] 12 Apr 23:48:13.085 * Background saving started by pid 22844
+[15688] 12 Apr 23:48:13.420 # fork operation complete
+[15688] 12 Apr 23:48:13.459 * Background saving terminated with success
+[15688] 13 Apr 01:23:17.276 * 1000 changes in 60 seconds. Saving...
+[15688] 13 Apr 01:23:17.296 * Background saving started by pid 17152
+[15688] 13 Apr 01:23:17.726 # fork operation complete
+[15688] 13 Apr 01:23:17.778 * Background saving terminated with success
+[15688] 13 Apr 02:51:56.530 * 1000 changes in 60 seconds. Saving...
+[15688] 13 Apr 02:51:56.554 * Background saving started by pid 10384
+[15688] 13 Apr 02:51:56.873 # fork operation complete
+[15688] 13 Apr 02:51:56.937 * Background saving terminated with success
+[15688] 13 Apr 04:17:18.151 * 1000 changes in 60 seconds. Saving...
+[15688] 13 Apr 04:17:18.171 * Background saving started by pid 9748
+[15688] 13 Apr 04:17:18.495 # fork operation complete
+[15688] 13 Apr 04:17:18.512 * Background saving terminated with success
+[15688] 13 Apr 05:45:00.705 * 1000 changes in 60 seconds. Saving...
+[15688] 13 Apr 05:45:00.717 * Background saving started by pid 24972
+[15688] 13 Apr 05:45:01.157 # fork operation complete
+[15688] 13 Apr 05:45:01.198 * Background saving terminated with success
+[21716] 13 Apr 10:24:17.312 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[21716] 13 Apr 10:24:17.313 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=21716, just started
+[21716] 13 Apr 10:24:17.314 # Configuration loaded
+[21716] 13 Apr 10:24:17.333 * Running mode=standalone, port=6379.
+[21716] 13 Apr 10:24:17.333 # Server initialized
+[21716] 13 Apr 10:24:18.767 * DB loaded from append only file: 1.433 seconds
+[21716] 13 Apr 10:24:18.767 * Ready to accept connections
+[21716] 13 Apr 10:25:18.077 * 1000 changes in 60 seconds. Saving...
+[21716] 13 Apr 10:25:18.084 * Background saving started by pid 10276
+[21716] 13 Apr 10:25:18.405 # fork operation complete
+[21716] 13 Apr 10:25:18.441 * Background saving terminated with success
+[21716] 13 Apr 11:53:23.379 * 1000 changes in 60 seconds. Saving...
+[21716] 13 Apr 11:53:23.405 * Background saving started by pid 26200
+[21716] 13 Apr 11:53:24.285 # fork operation complete
+[21716] 13 Apr 11:53:24.322 * Background saving terminated with success
+[9512] 13 Apr 21:55:32.258 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[9512] 13 Apr 21:55:32.258 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=9512, just started
+[9512] 13 Apr 21:55:32.258 # Configuration loaded
+[9512] 13 Apr 21:55:32.269 * Running mode=standalone, port=6379.
+[9512] 13 Apr 21:55:32.269 # Server initialized
+[9512] 13 Apr 21:55:33.331 * DB loaded from append only file: 1.062 seconds
+[9512] 13 Apr 21:55:33.331 * Ready to accept connections
+[9512] 13 Apr 21:56:33.058 * 1000 changes in 60 seconds. Saving...
+[9512] 13 Apr 21:56:33.090 * Background saving started by pid 12852
+[9512] 13 Apr 21:56:33.412 # fork operation complete
+[9512] 13 Apr 21:56:33.461 * Background saving terminated with success
+[5460] 14 Apr 22:29:28.611 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[5460] 14 Apr 22:29:28.611 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=5460, just started
+[5460] 14 Apr 22:29:28.611 # Configuration loaded
+[5460] 14 Apr 22:29:28.620 * Running mode=standalone, port=6379.
+[5460] 14 Apr 22:29:28.620 # Server initialized
+[5460] 14 Apr 22:29:29.799 * DB loaded from append only file: 1.179 seconds
+[5460] 14 Apr 22:29:29.799 * Ready to accept connections
+[5460] 14 Apr 22:30:29.072 * 1000 changes in 60 seconds. Saving...
+[5460] 14 Apr 22:30:29.078 * Background saving started by pid 16296
+[5460] 14 Apr 22:30:29.401 # fork operation complete
+[5460] 14 Apr 22:30:29.423 * Background saving terminated with success
+[5460] 15 Apr 03:52:56.713 * 1000 changes in 60 seconds. Saving...
+[5460] 15 Apr 03:52:56.755 * Background saving started by pid 17024
+[5460] 15 Apr 03:52:57.073 # fork operation complete
+[5460] 15 Apr 03:52:57.102 * Background saving terminated with success
+[5460] 15 Apr 05:27:28.326 * 1000 changes in 60 seconds. Saving...
+[5460] 15 Apr 05:27:28.357 * Background saving started by pid 17324
+[5460] 15 Apr 05:27:28.714 # fork operation complete
+[5460] 15 Apr 05:27:28.736 * Background saving terminated with success
+[5460] 15 Apr 10:18:15.625 * 1000 changes in 60 seconds. Saving...
+[5460] 15 Apr 10:18:15.674 * Background saving started by pid 30188
+[5460] 15 Apr 10:18:16.342 # fork operation complete
+[5460] 15 Apr 10:18:16.528 * Background saving terminated with success
+[5460] 16 Apr 02:50:30.002 * 1000 changes in 60 seconds. Saving...
+[5460] 16 Apr 02:50:30.018 * Background saving started by pid 22496
+[5460] 16 Apr 02:50:30.345 # fork operation complete
+[5460] 16 Apr 02:50:30.371 * Background saving terminated with success
+[5460] 16 Apr 04:37:43.214 * 1000 changes in 60 seconds. Saving...
+[5460] 16 Apr 04:37:43.267 * Background saving started by pid 5956
+[5460] 16 Apr 04:37:43.807 # fork operation complete
+[5460] 16 Apr 04:37:43.841 * Background saving terminated with success
+[5460] 16 Apr 06:28:39.467 * 1000 changes in 60 seconds. Saving...
+[5460] 16 Apr 06:28:39.500 * Background saving started by pid 30520
+[5460] 16 Apr 06:28:40.110 # fork operation complete
+[5460] 16 Apr 06:28:40.134 * Background saving terminated with success
+[5460] 16 Apr 07:57:40.692 * 1000 changes in 60 seconds. Saving...
+[5460] 16 Apr 07:57:40.711 * Background saving started by pid 616
+[5460] 16 Apr 07:57:41.037 # fork operation complete
+[5460] 16 Apr 07:57:41.060 * Background saving terminated with success
+[1220] 16 Apr 09:28:29.390 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[1220] 16 Apr 09:28:29.390 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=1220, just started
+[1220] 16 Apr 09:28:29.390 # Configuration loaded
+[1220] 16 Apr 09:28:29.398 * Running mode=standalone, port=6379.
+[1220] 16 Apr 09:28:29.398 # Server initialized
+[1220] 16 Apr 09:28:30.653 * DB loaded from append only file: 1.254 seconds
+[1220] 16 Apr 09:28:30.653 * Ready to accept connections
+[1220] 16 Apr 09:29:30.028 * 1000 changes in 60 seconds. Saving...
+[1220] 16 Apr 09:29:30.054 * Background saving started by pid 14892
+[1220] 16 Apr 09:29:30.834 # fork operation complete
+[1220] 16 Apr 09:29:30.871 * Background saving terminated with success
+[1220] 16 Apr 10:59:05.659 * 1000 changes in 60 seconds. Saving...
+[1220] 16 Apr 10:59:05.684 * Background saving started by pid 6048
+[1220] 16 Apr 10:59:06.362 # fork operation complete
+[1220] 16 Apr 10:59:06.386 * Background saving terminated with success
+[1220] 17 Apr 06:29:35.559 * 1000 changes in 60 seconds. Saving...
+[1220] 17 Apr 06:29:35.576 * Background saving started by pid 25164
+[1220] 17 Apr 06:29:40.266 # fork operation complete
+[1220] 17 Apr 06:29:40.328 * Background saving terminated with success
+[1220] 17 Apr 10:56:57.082 * 1000 changes in 60 seconds. Saving...
+[1220] 17 Apr 10:56:57.096 * Background saving started by pid 27864
+[1220] 17 Apr 10:56:57.427 # fork operation complete
+[1220] 17 Apr 10:56:57.465 * Background saving terminated with success
+[1220] 17 Apr 22:37:32.417 * 1000 changes in 60 seconds. Saving...
+[1220] 17 Apr 22:37:32.432 * Background saving started by pid 26784
+[1220] 17 Apr 22:37:32.863 # fork operation complete
+[1220] 17 Apr 22:37:32.909 * Background saving terminated with success
+[1220] 17 Apr 23:57:16.721 * 1000 changes in 60 seconds. Saving...
+[1220] 17 Apr 23:57:16.728 * Background saving started by pid 26952
+[1220] 17 Apr 23:57:17.047 # fork operation complete
+[1220] 17 Apr 23:57:17.071 * Background saving terminated with success
+[1220] 18 Apr 01:15:00.868 * 1000 changes in 60 seconds. Saving...
+[1220] 18 Apr 01:15:00.876 * Background saving started by pid 23868
+[1220] 18 Apr 01:15:01.194 # fork operation complete
+[1220] 18 Apr 01:15:01.238 * Background saving terminated with success
+[1220] 18 Apr 02:56:10.846 * 1000 changes in 60 seconds. Saving...
+[1220] 18 Apr 02:56:10.855 * Background saving started by pid 26168
+[1220] 18 Apr 02:56:11.321 # fork operation complete
+[1220] 18 Apr 02:56:11.360 * Background saving terminated with success
+[13352] 18 Apr 03:50:09.584 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[13352] 18 Apr 03:50:09.584 # Redis version=5.0.14.1, bits=64, commit=ec77f72d, modified=0, pid=13352, just started
+[13352] 18 Apr 03:50:09.584 # Configuration loaded
+[13352] 18 Apr 03:50:09.592 * Running mode=standalone, port=6379.
+[13352] 18 Apr 03:50:09.592 # Server initialized
+[13352] 18 Apr 03:50:11.289 * DB loaded from append only file: 1.697 seconds
+[13352] 18 Apr 03:50:11.289 * Ready to accept connections
+[13352] 18 Apr 03:51:10.105 * 1000 changes in 60 seconds. Saving...
+[13352] 18 Apr 03:51:10.116 * Background saving started by pid 20656
+[13352] 18 Apr 03:51:10.450 # fork operation complete
+[13352] 18 Apr 03:51:10.468 * Background saving terminated with success
