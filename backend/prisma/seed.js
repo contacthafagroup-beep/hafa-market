@@ -1,3 +1,11 @@
+﻿// Skip if already seeded
+const { PrismaClient: PC2 } = require('@prisma/client');
+const pc2 = new PC2();
+pc2.product.count().then(count => {
+  if (count > 10) { console.log('Database already seeded (' + count + ' products). Skipping.'); pc2.$disconnect(); process.exit(0); }
+  pc2.$disconnect();
+}).catch(() => {});
+// ALREADY_SEEDED_CHECK
 // backend/prisma/seed.js
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
@@ -5,10 +13,10 @@ const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Starting seed...');
+  console.log('ðŸŒ± Starting seed...');
 
-  // ─── 1. OWNER USER ───────────────────────────────────────────────────────────
-  console.log('👤 Creating owner account...');
+  // â”€â”€â”€ 1. OWNER USER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸ‘¤ Creating owner account...');
   const passwordHash = await bcrypt.hash('Tilahun@2026', 12);
 
   const owner = await prisma.user.upsert({
@@ -23,10 +31,10 @@ async function main() {
       isActive: true,
     },
   });
-  console.log(`✅ Owner user created: ${owner.email}`);
+  console.log(`âœ… Owner user created: ${owner.email}`);
 
-  // ─── 2. SELLER PROFILE ───────────────────────────────────────────────────────
-  console.log('🏪 Creating seller profile...');
+  // â”€â”€â”€ 2. SELLER PROFILE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸª Creating seller profile...');
   const seller = await prisma.seller.upsert({
     where: { storeSlug: 'hafa-official' },
     update: {},
@@ -42,23 +50,23 @@ async function main() {
         "Ethiopia's premier agricultural marketplace. Fresh produce, grains, coffee and specialty products from Hossana and the SNNPR region.",
     },
   });
-  console.log(`✅ Seller profile created: ${seller.storeName}`);
+  console.log(`âœ… Seller profile created: ${seller.storeName}`);
 
-  // ─── 3. CATEGORIES ───────────────────────────────────────────────────────────
-  console.log('📂 Creating categories...');
+  // â”€â”€â”€ 3. CATEGORIES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸ“‚ Creating categories...');
   const categoryData = [
-    { name: 'Vegetables',  nameAm: 'አትክልቶች',       nameOm: 'Kuduraa',      slug: 'vegetables', emoji: '🥬' },
-    { name: 'Fruits',      nameAm: 'ፍራፍሬ',          nameOm: 'Fuduraa',      slug: 'fruits',     emoji: '🍎' },
-    { name: 'Grains',      nameAm: 'እህሎች',           nameOm: 'Midhaan',      slug: 'grains',     emoji: '🌾' },
-    { name: 'Legumes',     nameAm: 'ጥራጥሬ',          nameOm: 'Baaqelaa',     slug: 'legumes',    emoji: '🫘' },
-    { name: 'Spices',      nameAm: 'ቅመማ ቅመም',       nameOm: 'Dhadhaa',      slug: 'spices',     emoji: '🌿' },
-    { name: 'Poultry',     nameAm: 'ዶሮ እና ወተት',     nameOm: 'Lukkuu',       slug: 'poultry',    emoji: '🥚' },
-    { name: 'Meat',        nameAm: 'ስጋ',             nameOm: 'Foon',         slug: 'meat',       emoji: '🥩' },
-    { name: 'Coffee',      nameAm: 'ቡና',             nameOm: 'Bunaa',        slug: 'coffee',     emoji: '☕' },
-    { name: 'Specialty',   nameAm: 'ልዩ ምርቶች',       nameOm: 'Oomisha Addaa', slug: 'specialty', emoji: '🍯' },
-    { name: 'Processed',   nameAm: 'ተዘጋጅቶ ምግብ',    nameOm: 'Nyaata',       slug: 'processed',  emoji: '🍲' },
-    { name: 'Household',   nameAm: 'የቤት ዕቃዎች',      nameOm: 'Mana',         slug: 'household',  emoji: '🏠' },
-    { name: 'Services',    nameAm: 'አገልግሎት',         nameOm: 'Tajaajila',    slug: 'services',   emoji: '🚚' },
+    { name: 'Vegetables',  nameAm: 'áŠ á‰µáŠ­áˆá‰¶á‰½',       nameOm: 'Kuduraa',      slug: 'vegetables', emoji: 'ðŸ¥¬' },
+    { name: 'Fruits',      nameAm: 'ááˆ«ááˆ¬',          nameOm: 'Fuduraa',      slug: 'fruits',     emoji: 'ðŸŽ' },
+    { name: 'Grains',      nameAm: 'áŠ¥áˆ…áˆŽá‰½',           nameOm: 'Midhaan',      slug: 'grains',     emoji: 'ðŸŒ¾' },
+    { name: 'Legumes',     nameAm: 'áŒ¥áˆ«áŒ¥áˆ¬',          nameOm: 'Baaqelaa',     slug: 'legumes',    emoji: 'ðŸ«˜' },
+    { name: 'Spices',      nameAm: 'á‰…áˆ˜áˆ› á‰…áˆ˜áˆ',       nameOm: 'Dhadhaa',      slug: 'spices',     emoji: 'ðŸŒ¿' },
+    { name: 'Poultry',     nameAm: 'á‹¶áˆ® áŠ¥áŠ“ á‹ˆá‰°á‰µ',     nameOm: 'Lukkuu',       slug: 'poultry',    emoji: 'ðŸ¥š' },
+    { name: 'Meat',        nameAm: 'áˆµáŒ‹',             nameOm: 'Foon',         slug: 'meat',       emoji: 'ðŸ¥©' },
+    { name: 'Coffee',      nameAm: 'á‰¡áŠ“',             nameOm: 'Bunaa',        slug: 'coffee',     emoji: 'â˜•' },
+    { name: 'Specialty',   nameAm: 'áˆá‹© áˆáˆ­á‰¶á‰½',       nameOm: 'Oomisha Addaa', slug: 'specialty', emoji: 'ðŸ¯' },
+    { name: 'Processed',   nameAm: 'á‰°á‹˜áŒ‹áŒ…á‰¶ áˆáŒá‰¥',    nameOm: 'Nyaata',       slug: 'processed',  emoji: 'ðŸ²' },
+    { name: 'Household',   nameAm: 'á‹¨á‰¤á‰µ á‹•á‰ƒá‹Žá‰½',      nameOm: 'Mana',         slug: 'household',  emoji: 'ðŸ ' },
+    { name: 'Services',    nameAm: 'áŠ áŒˆáˆáŒáˆŽá‰µ',         nameOm: 'Tajaajila',    slug: 'services',   emoji: 'ðŸšš' },
   ];
 
   const categories = {};
@@ -69,16 +77,16 @@ async function main() {
       create: cat,
     });
     categories[cat.slug] = created;
-    console.log(`  ✅ Category: ${cat.emoji} ${cat.name}`);
+    console.log(`  âœ… Category: ${cat.emoji} ${cat.name}`);
   }
 
-  // ─── 4. PRODUCTS ─────────────────────────────────────────────────────────────
-  console.log('🛒 Creating products...');
+  // â”€â”€â”€ 4. PRODUCTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸ›’ Creating products...');
 
   const productsData = [
-    // ── VEGETABLES ──
+    // â”€â”€ VEGETABLES â”€â”€
     {
-      name: 'Fresh Tomatoes', nameAm: 'ቲማቲም', nameOm: 'Xaafii',
+      name: 'Fresh Tomatoes', nameAm: 'á‰²áˆ›á‰²áˆ', nameOm: 'Xaafii',
       slug: 'fresh-tomatoes', categorySlug: 'vegetables',
       price: 45, comparePrice: 60, unit: 'kg', stock: 500,
       isOrganic: false, isFeatured: true, soldCount: 450,
@@ -87,7 +95,7 @@ async function main() {
       description: 'Fresh, ripe tomatoes sourced directly from local farms in the SNNPR region.',
     },
     {
-      name: 'Red Onions', nameAm: 'ቀይ ሽንኩርት', nameOm: 'Qullubbii Diimaa',
+      name: 'Red Onions', nameAm: 'á‰€á‹­ áˆ½áŠ•áŠ©áˆ­á‰µ', nameOm: 'Qullubbii Diimaa',
       slug: 'red-onions', categorySlug: 'vegetables',
       price: 35, comparePrice: 45, unit: 'kg', stock: 800,
       isOrganic: false, isFeatured: true, soldCount: 380,
@@ -96,7 +104,7 @@ async function main() {
       description: 'Premium red onions from Hossana farms, perfect for Ethiopian cuisine.',
     },
     {
-      name: 'Green Cabbage', nameAm: 'ጎመን', nameOm: 'Qaabeessa',
+      name: 'Green Cabbage', nameAm: 'áŒŽáˆ˜áŠ•', nameOm: 'Qaabeessa',
       slug: 'green-cabbage', categorySlug: 'vegetables',
       price: 25, comparePrice: 35, unit: 'kg', stock: 300,
       isOrganic: true, isFeatured: false, soldCount: 220,
@@ -105,7 +113,7 @@ async function main() {
       description: 'Organically grown green cabbage, fresh from the highland farms.',
     },
     {
-      name: 'Carrots', nameAm: 'ካሮት', nameOm: 'Karoota',
+      name: 'Carrots', nameAm: 'áŠ«áˆ®á‰µ', nameOm: 'Karoota',
       slug: 'carrots', categorySlug: 'vegetables',
       price: 40, comparePrice: 55, unit: 'kg', stock: 400,
       isOrganic: true, isFeatured: false, soldCount: 180,
@@ -114,7 +122,7 @@ async function main() {
       description: 'Sweet, organic carrots grown in the fertile soils of SNNPR.',
     },
     {
-      name: 'Potatoes', nameAm: 'ድንች', nameOm: 'Qocaa',
+      name: 'Potatoes', nameAm: 'á‹µáŠ•á‰½', nameOm: 'Qocaa',
       slug: 'potatoes', categorySlug: 'vegetables',
       price: 30, comparePrice: 40, unit: 'kg', stock: 1000,
       isOrganic: false, isFeatured: true, soldCount: 500,
@@ -123,7 +131,7 @@ async function main() {
       description: 'Fresh potatoes, a staple of Ethiopian households. Bulk available.',
     },
     {
-      name: 'Green Peppers', nameAm: 'ቃሪያ', nameOm: 'Barbaree',
+      name: 'Green Peppers', nameAm: 'á‰ƒáˆªá‹«', nameOm: 'Barbaree',
       slug: 'green-peppers', categorySlug: 'vegetables',
       price: 80, comparePrice: 100, unit: 'kg', stock: 200,
       isOrganic: false, isFeatured: false, soldCount: 150,
@@ -132,7 +140,7 @@ async function main() {
       description: 'Fresh green peppers, ideal for stews and salads.',
     },
     {
-      name: 'Garlic', nameAm: 'ነጭ ሽንኩርት', nameOm: 'Qullubbii Adii',
+      name: 'Garlic', nameAm: 'áŠáŒ­ áˆ½áŠ•áŠ©áˆ­á‰µ', nameOm: 'Qullubbii Adii',
       slug: 'garlic', categorySlug: 'vegetables',
       price: 120, comparePrice: 150, unit: 'kg', stock: 150,
       isOrganic: true, isFeatured: false, soldCount: 200,
@@ -141,7 +149,7 @@ async function main() {
       description: 'Organic garlic with strong aroma, essential for Ethiopian spice blends.',
     },
     {
-      name: 'Spinach', nameAm: 'ቆስጣ', nameOm: 'Qocaa Magariisa',
+      name: 'Spinach', nameAm: 'á‰†áˆµáŒ£', nameOm: 'Qocaa Magariisa',
       slug: 'spinach', categorySlug: 'vegetables',
       price: 30, comparePrice: 40, unit: 'bunch', stock: 200,
       isOrganic: true, isFeatured: false, soldCount: 120,
@@ -150,9 +158,9 @@ async function main() {
       description: 'Fresh organic spinach bunches, harvested daily.',
     },
 
-    // ── FRUITS ──
+    // â”€â”€ FRUITS â”€â”€
     {
-      name: 'Avocado', nameAm: 'አቮካዶ', nameOm: 'Avocado',
+      name: 'Avocado', nameAm: 'áŠ á‰®áŠ«á‹¶', nameOm: 'Avocado',
       slug: 'avocado', categorySlug: 'fruits',
       price: 60, comparePrice: 80, unit: 'kg', stock: 300,
       isOrganic: true, isFeatured: true, soldCount: 350,
@@ -161,7 +169,7 @@ async function main() {
       description: 'Creamy organic avocados from the lush farms of southern Ethiopia.',
     },
     {
-      name: 'Banana', nameAm: 'ሙዝ', nameOm: 'Muuzii',
+      name: 'Banana', nameAm: 'áˆ™á‹', nameOm: 'Muuzii',
       slug: 'banana', categorySlug: 'fruits',
       price: 25, comparePrice: 35, unit: 'kg', stock: 500,
       isOrganic: false, isFeatured: true, soldCount: 420,
@@ -170,7 +178,7 @@ async function main() {
       description: 'Sweet ripe bananas, freshly harvested from local plantations.',
     },
     {
-      name: 'Mango', nameAm: 'ማንጎ', nameOm: 'Maangoo',
+      name: 'Mango', nameAm: 'áˆ›áŠ•áŒŽ', nameOm: 'Maangoo',
       slug: 'mango', categorySlug: 'fruits',
       price: 50, comparePrice: 70, unit: 'kg', stock: 400,
       isOrganic: false, isFeatured: true, soldCount: 300,
@@ -179,7 +187,7 @@ async function main() {
       description: 'Juicy Ethiopian mangoes, in season and full of flavor.',
     },
     {
-      name: 'Papaya', nameAm: 'ፓፓያ', nameOm: 'Paappaayyaa',
+      name: 'Papaya', nameAm: 'á“á“á‹«', nameOm: 'Paappaayyaa',
       slug: 'papaya', categorySlug: 'fruits',
       price: 40, comparePrice: 55, unit: 'kg', stock: 200,
       isOrganic: false, isFeatured: false, soldCount: 160,
@@ -188,7 +196,7 @@ async function main() {
       description: 'Fresh papayas rich in vitamins, sourced from local farms.',
     },
     {
-      name: 'Orange', nameAm: 'ብርቱካን', nameOm: 'Burtukaana',
+      name: 'Orange', nameAm: 'á‰¥áˆ­á‰±áŠ«áŠ•', nameOm: 'Burtukaana',
       slug: 'orange', categorySlug: 'fruits',
       price: 35, comparePrice: 50, unit: 'kg', stock: 600,
       isOrganic: false, isFeatured: false, soldCount: 280,
@@ -197,9 +205,9 @@ async function main() {
       description: 'Sweet and tangy oranges, perfect for fresh juice.',
     },
 
-    // ── GRAINS ──
+    // â”€â”€ GRAINS â”€â”€
     {
-      name: 'Teff Grain 5kg', nameAm: 'ጤፍ', nameOm: 'Xaafii',
+      name: 'Teff Grain 5kg', nameAm: 'áŒ¤á', nameOm: 'Xaafii',
       slug: 'teff-grain-5kg', categorySlug: 'grains',
       price: 280, comparePrice: 350, unit: 'bag', stock: 200,
       isOrganic: true, isFeatured: true, soldCount: 400,
@@ -208,7 +216,7 @@ async function main() {
       description: 'Premium organic teff grain, the ancient Ethiopian superfood. 5kg bag.',
     },
     {
-      name: 'White Wheat 10kg', nameAm: 'ስንዴ', nameOm: 'Qamadii',
+      name: 'White Wheat 10kg', nameAm: 'áˆµáŠ•á‹´', nameOm: 'Qamadii',
       slug: 'white-wheat-10kg', categorySlug: 'grains',
       price: 350, comparePrice: 420, unit: 'bag', stock: 300,
       isOrganic: false, isFeatured: false, soldCount: 250,
@@ -217,7 +225,7 @@ async function main() {
       description: 'High-quality white wheat, milled from Ethiopian highland farms. 10kg bag.',
     },
     {
-      name: 'Maize', nameAm: 'በቆሎ', nameOm: 'Boqqolloo',
+      name: 'Maize', nameAm: 'á‰ á‰†áˆŽ', nameOm: 'Boqqolloo',
       slug: 'maize', categorySlug: 'grains',
       price: 25, comparePrice: 35, unit: 'kg', stock: 1000,
       isOrganic: false, isFeatured: false, soldCount: 320,
@@ -226,7 +234,7 @@ async function main() {
       description: 'Fresh maize from the fertile lowlands, great for roasting or grinding.',
     },
     {
-      name: 'Barley', nameAm: 'ገብስ', nameOm: 'Garbuu',
+      name: 'Barley', nameAm: 'áŒˆá‰¥áˆµ', nameOm: 'Garbuu',
       slug: 'barley', categorySlug: 'grains',
       price: 30, comparePrice: 40, unit: 'kg', stock: 500,
       isOrganic: false, isFeatured: false, soldCount: 180,
@@ -235,7 +243,7 @@ async function main() {
       description: 'Ethiopian highland barley, used for tella and traditional foods.',
     },
     {
-      name: 'Sorghum', nameAm: 'ማሽላ', nameOm: 'Bishingaa',
+      name: 'Sorghum', nameAm: 'áˆ›áˆ½áˆ‹', nameOm: 'Bishingaa',
       slug: 'sorghum', categorySlug: 'grains',
       price: 22, comparePrice: 30, unit: 'kg', stock: 800,
       isOrganic: false, isFeatured: false, soldCount: 140,
@@ -244,9 +252,9 @@ async function main() {
       description: 'Drought-resistant sorghum grain, a staple in southern Ethiopia.',
     },
 
-    // ── LEGUMES ──
+    // â”€â”€ LEGUMES â”€â”€
     {
-      name: 'Red Lentils', nameAm: 'ምስር', nameOm: 'Adaas Diimaa',
+      name: 'Red Lentils', nameAm: 'áˆáˆµáˆ­', nameOm: 'Adaas Diimaa',
       slug: 'red-lentils', categorySlug: 'legumes',
       price: 90, comparePrice: 110, unit: 'kg', stock: 300,
       isOrganic: true, isFeatured: false, soldCount: 220,
@@ -255,7 +263,7 @@ async function main() {
       description: 'Organic red lentils, perfect for misir wot and soups.',
     },
     {
-      name: 'Chickpeas', nameAm: 'ሽምብራ', nameOm: 'Qorii',
+      name: 'Chickpeas', nameAm: 'áˆ½áˆá‰¥áˆ«', nameOm: 'Qorii',
       slug: 'chickpeas', categorySlug: 'legumes',
       price: 85, comparePrice: 100, unit: 'kg', stock: 400,
       isOrganic: false, isFeatured: false, soldCount: 190,
@@ -264,7 +272,7 @@ async function main() {
       description: 'Premium chickpeas for shimbra asa and traditional fasting dishes.',
     },
     {
-      name: 'Black-eyed Peas', nameAm: 'ባቄላ', nameOm: 'Baaqelaa',
+      name: 'Black-eyed Peas', nameAm: 'á‰£á‰„áˆ‹', nameOm: 'Baaqelaa',
       slug: 'black-eyed-peas', categorySlug: 'legumes',
       price: 70, comparePrice: 90, unit: 'kg', stock: 350,
       isOrganic: false, isFeatured: false, soldCount: 160,
@@ -273,7 +281,7 @@ async function main() {
       description: 'Fresh black-eyed peas, a nutritious legume for Ethiopian stews.',
     },
     {
-      name: 'Soybeans', nameAm: 'ሶያ', nameOm: 'Sooyaa',
+      name: 'Soybeans', nameAm: 'áˆ¶á‹«', nameOm: 'Sooyaa',
       slug: 'soybeans', categorySlug: 'legumes',
       price: 75, comparePrice: 95, unit: 'kg', stock: 250,
       isOrganic: true, isFeatured: false, soldCount: 130,
@@ -282,9 +290,9 @@ async function main() {
       description: 'Organic soybeans, high in protein and great for various dishes.',
     },
 
-    // ── SPICES ──
+    // â”€â”€ SPICES â”€â”€
     {
-      name: 'Berbere Spice Mix 500g', nameAm: 'በርበሬ', nameOm: 'Barbaree Dhadhaa',
+      name: 'Berbere Spice Mix 500g', nameAm: 'á‰ áˆ­á‰ áˆ¬', nameOm: 'Barbaree Dhadhaa',
       slug: 'berbere-spice-mix-500g', categorySlug: 'spices',
       price: 150, comparePrice: 200, unit: 'pack', stock: 200,
       isOrganic: true, isFeatured: true, soldCount: 380,
@@ -293,7 +301,7 @@ async function main() {
       description: 'Authentic Ethiopian berbere spice blend, hand-ground from organic chilies and spices. 500g pack.',
     },
     {
-      name: 'Mitmita 250g', nameAm: 'ሚጥሚጣ', nameOm: 'Mitmitaa',
+      name: 'Mitmita 250g', nameAm: 'áˆšáŒ¥áˆšáŒ£', nameOm: 'Mitmitaa',
       slug: 'mitmita-250g', categorySlug: 'spices',
       price: 120, comparePrice: 160, unit: 'pack', stock: 150,
       isOrganic: true, isFeatured: false, soldCount: 200,
@@ -302,7 +310,7 @@ async function main() {
       description: 'Fiery mitmita spice blend, a staple of Ethiopian kitchens. 250g pack.',
     },
     {
-      name: 'Turmeric', nameAm: 'ቢጫ ዝንጅብል', nameOm: 'Ird',
+      name: 'Turmeric', nameAm: 'á‰¢áŒ« á‹áŠ•áŒ…á‰¥áˆ', nameOm: 'Ird',
       slug: 'turmeric', categorySlug: 'spices',
       price: 200, comparePrice: 250, unit: 'kg', stock: 100,
       isOrganic: true, isFeatured: false, soldCount: 150,
@@ -311,7 +319,7 @@ async function main() {
       description: 'Pure organic turmeric powder, freshly ground from Ethiopian roots.',
     },
     {
-      name: 'Ginger', nameAm: 'ዝንጅብል', nameOm: 'Zinjibila',
+      name: 'Ginger', nameAm: 'á‹áŠ•áŒ…á‰¥áˆ', nameOm: 'Zinjibila',
       slug: 'ginger', categorySlug: 'spices',
       price: 180, comparePrice: 220, unit: 'kg', stock: 120,
       isOrganic: true, isFeatured: false, soldCount: 170,
@@ -320,9 +328,9 @@ async function main() {
       description: 'Fresh organic ginger root, aromatic and full of flavor.',
     },
 
-    // ── COFFEE ──
+    // â”€â”€ COFFEE â”€â”€
     {
-      name: 'Yirgacheffe Coffee Roasted 500g', nameAm: 'ይርጋጨፌ ቡና', nameOm: 'Bunaa Yirgacheffe',
+      name: 'Yirgacheffe Coffee Roasted 500g', nameAm: 'á‹­áˆ­áŒ‹áŒ¨áŒ á‰¡áŠ“', nameOm: 'Bunaa Yirgacheffe',
       slug: 'yirgacheffe-coffee-roasted-500g', categorySlug: 'coffee',
       price: 350, comparePrice: 450, unit: 'bag', stock: 100,
       isOrganic: true, isFeatured: true, soldCount: 320,
@@ -331,7 +339,7 @@ async function main() {
       description: 'World-renowned Yirgacheffe single-origin coffee, medium roast. Floral and citrus notes. 500g bag.',
     },
     {
-      name: 'Sidama Coffee Green 1kg', nameAm: 'ሲዳማ ቡና', nameOm: 'Bunaa Sidama',
+      name: 'Sidama Coffee Green 1kg', nameAm: 'áˆ²á‹³áˆ› á‰¡áŠ“', nameOm: 'Bunaa Sidama',
       slug: 'sidama-coffee-green-1kg', categorySlug: 'coffee',
       price: 280, comparePrice: 350, unit: 'kg', stock: 80,
       isOrganic: true, isFeatured: true, soldCount: 280,
@@ -340,7 +348,7 @@ async function main() {
       description: 'Premium green (unroasted) Sidama coffee beans. Roast at home for ultimate freshness. 1kg.',
     },
     {
-      name: 'Jimma Coffee Roasted 250g', nameAm: 'ጅማ ቡና', nameOm: 'Bunaa Jimmaa',
+      name: 'Jimma Coffee Roasted 250g', nameAm: 'áŒ…áˆ› á‰¡áŠ“', nameOm: 'Bunaa Jimmaa',
       slug: 'jimma-coffee-roasted-250g', categorySlug: 'coffee',
       price: 180, comparePrice: 230, unit: 'bag', stock: 120,
       isOrganic: false, isFeatured: false, soldCount: 200,
@@ -349,7 +357,7 @@ async function main() {
       description: 'Bold and earthy Jimma coffee, dark roast. A classic Ethiopian brew. 250g bag.',
     },
     {
-      name: 'Harrar Coffee 500g', nameAm: 'ሐረር ቡና', nameOm: 'Bunaa Haraar',
+      name: 'Harrar Coffee 500g', nameAm: 'áˆáˆ¨áˆ­ á‰¡áŠ“', nameOm: 'Bunaa Haraar',
       slug: 'harrar-coffee-500g', categorySlug: 'coffee',
       price: 320, comparePrice: 400, unit: 'bag', stock: 90,
       isOrganic: true, isFeatured: false, soldCount: 240,
@@ -358,9 +366,9 @@ async function main() {
       description: 'Exotic Harrar coffee with wine-like and blueberry notes. Dry-processed. 500g bag.',
     },
 
-    // ── SPECIALTY ──
+    // â”€â”€ SPECIALTY â”€â”€
     {
-      name: 'Pure Wildflower Honey 500g', nameAm: 'ንጹህ ማር', nameOm: 'Damma Qulqulluu',
+      name: 'Pure Wildflower Honey 500g', nameAm: 'áŠ•áŒ¹áˆ… áˆ›áˆ­', nameOm: 'Damma Qulqulluu',
       slug: 'pure-wildflower-honey-500g', categorySlug: 'specialty',
       price: 450, comparePrice: 600, unit: 'jar', stock: 80,
       isOrganic: true, isFeatured: true, soldCount: 350,
@@ -369,7 +377,7 @@ async function main() {
       description: 'Raw, unfiltered wildflower honey from the highlands of SNNPR. 500g jar.',
     },
     {
-      name: 'Moringa Powder 250g', nameAm: 'ሞሪንጋ', nameOm: 'Moringaa',
+      name: 'Moringa Powder 250g', nameAm: 'áˆžáˆªáŠ•áŒ‹', nameOm: 'Moringaa',
       slug: 'moringa-powder-250g', categorySlug: 'specialty',
       price: 280, comparePrice: 350, unit: 'pack', stock: 100,
       isOrganic: true, isFeatured: false, soldCount: 180,
@@ -378,7 +386,7 @@ async function main() {
       description: 'Pure organic moringa leaf powder, a nutritional powerhouse. 250g pack.',
     },
     {
-      name: 'Black Seed (Nigella) 250g', nameAm: 'ጥቁር አዝሙድ', nameOm: 'Abashii',
+      name: 'Black Seed (Nigella) 250g', nameAm: 'áŒ¥á‰áˆ­ áŠ á‹áˆ™á‹µ', nameOm: 'Abashii',
       slug: 'black-seed-nigella-250g', categorySlug: 'specialty',
       price: 200, comparePrice: 260, unit: 'pack', stock: 150,
       isOrganic: true, isFeatured: false, soldCount: 220,
@@ -387,7 +395,7 @@ async function main() {
       description: 'Premium black seed (Nigella sativa), known for its health benefits. 250g pack.',
     },
     {
-      name: 'Flaxseed 500g', nameAm: 'ሰሊጥ', nameOm: 'Saliixii',
+      name: 'Flaxseed 500g', nameAm: 'áˆ°áˆŠáŒ¥', nameOm: 'Saliixii',
       slug: 'flaxseed-500g', categorySlug: 'specialty',
       price: 120, comparePrice: 160, unit: 'pack', stock: 200,
       isOrganic: true, isFeatured: false, soldCount: 160,
@@ -396,9 +404,9 @@ async function main() {
       description: 'Organic whole flaxseeds, rich in omega-3 and fiber. 500g pack.',
     },
 
-    // ── POULTRY ──
+    // â”€â”€ POULTRY â”€â”€
     {
-      name: 'Farm Fresh Eggs (30 pack)', nameAm: 'ዶሮ እንቁላል', nameOm: 'Hanqaaquu',
+      name: 'Farm Fresh Eggs (30 pack)', nameAm: 'á‹¶áˆ® áŠ¥áŠ•á‰áˆ‹áˆ', nameOm: 'Hanqaaquu',
       slug: 'farm-fresh-eggs-30-pack', categorySlug: 'poultry',
       price: 180, comparePrice: 220, unit: 'tray', stock: 100,
       isOrganic: false, isFeatured: true, soldCount: 400,
@@ -407,7 +415,7 @@ async function main() {
       description: 'Fresh free-range eggs from local farms. 30-egg tray.',
     },
     {
-      name: 'Fresh Whole Chicken', nameAm: 'ዶሮ', nameOm: 'Lukkuu',
+      name: 'Fresh Whole Chicken', nameAm: 'á‹¶áˆ®', nameOm: 'Lukkuu',
       slug: 'fresh-whole-chicken', categorySlug: 'poultry',
       price: 350, comparePrice: 420, unit: 'kg', stock: 50,
       isOrganic: false, isFeatured: false, soldCount: 200,
@@ -416,7 +424,7 @@ async function main() {
       description: 'Fresh whole chicken from local farms, cleaned and ready to cook.',
     },
     {
-      name: 'Fresh Cow Milk 1L', nameAm: 'ወተት', nameOm: 'Aannani',
+      name: 'Fresh Cow Milk 1L', nameAm: 'á‹ˆá‰°á‰µ', nameOm: 'Aannani',
       slug: 'fresh-cow-milk-1l', categorySlug: 'poultry',
       price: 45, comparePrice: 60, unit: 'liter', stock: 200,
       isOrganic: false, isFeatured: false, soldCount: 300,
@@ -425,9 +433,9 @@ async function main() {
       description: 'Fresh whole cow milk, collected daily from local dairy farms. 1 liter.',
     },
 
-    // ── PROCESSED ──
+    // â”€â”€ PROCESSED â”€â”€
     {
-      name: 'Injera (10 pieces)', nameAm: 'እንጀራ', nameOm: 'Injeeraa',
+      name: 'Injera (10 pieces)', nameAm: 'áŠ¥áŠ•áŒ€áˆ«', nameOm: 'Injeeraa',
       slug: 'injera-10-pieces', categorySlug: 'processed',
       price: 80, comparePrice: 100, unit: 'pack', stock: 150,
       isOrganic: false, isFeatured: true, soldCount: 450,
@@ -436,7 +444,7 @@ async function main() {
       description: 'Freshly made traditional Ethiopian injera from 100% teff. 10 pieces per pack.',
     },
     {
-      name: 'Shiro Powder 500g', nameAm: 'ሽሮ', nameOm: 'Shiroo',
+      name: 'Shiro Powder 500g', nameAm: 'áˆ½áˆ®', nameOm: 'Shiroo',
       slug: 'shiro-powder-500g', categorySlug: 'processed',
       price: 120, comparePrice: 150, unit: 'pack', stock: 200,
       isOrganic: false, isFeatured: false, soldCount: 280,
@@ -445,7 +453,7 @@ async function main() {
       description: 'Authentic Ethiopian shiro powder, spiced chickpea flour for shiro wot. 500g pack.',
     },
     {
-      name: 'Niter Kibbeh (Spiced Butter) 500g', nameAm: 'ንጥር ቅቤ', nameOm: 'Dhadhaa Qulqulluu',
+      name: 'Niter Kibbeh (Spiced Butter) 500g', nameAm: 'áŠ•áŒ¥áˆ­ á‰…á‰¤', nameOm: 'Dhadhaa Qulqulluu',
       slug: 'niter-kibbeh-500g', categorySlug: 'processed',
       price: 280, comparePrice: 350, unit: 'jar', stock: 80,
       isOrganic: false, isFeatured: false, soldCount: 200,
@@ -469,11 +477,11 @@ async function main() {
         origin: 'Ethiopia',
       },
     });
-    console.log(`  ✅ Product: ${p.name}`);
+    console.log(`  âœ… Product: ${p.name}`);
   }
 
-  // ─── 5. PROMO CODES ──────────────────────────────────────────────────────────
-  console.log('🎟️  Creating promo codes...');
+  // â”€â”€â”€ 5. PROMO CODES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸŽŸï¸  Creating promo codes...');
   const promoCodes = [
     {
       code: 'HAFA10',
@@ -510,11 +518,11 @@ async function main() {
       update: {},
       create: promo,
     });
-    console.log(`  ✅ Promo code: ${promo.code}`);
+    console.log(`  âœ… Promo code: ${promo.code}`);
   }
 
-  // ─── 6. BLOG POSTS ───────────────────────────────────────────────────────────
-  console.log('📝 Creating blog posts...');
+  // â”€â”€â”€ 6. BLOG POSTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸ“ Creating blog posts...');
   const blogPosts = [
     {
       title: "Why Ethiopian Coffee is the World's Best",
@@ -523,13 +531,13 @@ async function main() {
       excerpt: 'Discover why Ethiopia is the birthplace of coffee and why its varieties are prized worldwide.',
       content: `Ethiopia is the birthplace of coffee, and its diverse growing regions produce some of the most complex and sought-after beans in the world.
 
-**Yirgacheffe** — Located in the Gedeo Zone of the SNNPR region, Yirgacheffe coffees are celebrated for their bright acidity, floral aromas, and distinctive citrus and bergamot notes. The high altitude (1,700–2,200m) and rich soil create ideal conditions for slow cherry development.
+**Yirgacheffe** â€” Located in the Gedeo Zone of the SNNPR region, Yirgacheffe coffees are celebrated for their bright acidity, floral aromas, and distinctive citrus and bergamot notes. The high altitude (1,700â€“2,200m) and rich soil create ideal conditions for slow cherry development.
 
-**Sidama** — The Sidama zone produces coffees with a full body and bright acidity. Expect notes of dark chocolate, blueberry, and jasmine. Sidama coffees are often wet-processed, resulting in a clean, vibrant cup.
+**Sidama** â€” The Sidama zone produces coffees with a full body and bright acidity. Expect notes of dark chocolate, blueberry, and jasmine. Sidama coffees are often wet-processed, resulting in a clean, vibrant cup.
 
-**Harrar** — One of the oldest coffee-growing regions in the world, Harrar produces dry-processed (natural) coffees with a distinctive wine-like quality. Expect notes of blueberry, dark fruit, and a heavy, syrupy body.
+**Harrar** â€” One of the oldest coffee-growing regions in the world, Harrar produces dry-processed (natural) coffees with a distinctive wine-like quality. Expect notes of blueberry, dark fruit, and a heavy, syrupy body.
 
-Ethiopia's coffee culture is deeply embedded in daily life. The traditional coffee ceremony — roasting green beans, grinding by hand, and brewing in a clay jebena — is a ritual of hospitality and community.
+Ethiopia's coffee culture is deeply embedded in daily life. The traditional coffee ceremony â€” roasting green beans, grinding by hand, and brewing in a clay jebena â€” is a ritual of hospitality and community.
 
 At Hafa Market, we source directly from cooperatives in these regions, ensuring farmers receive fair prices and you receive the freshest, highest-quality coffee possible.`,
       isPublished: true,
@@ -542,16 +550,16 @@ At Hafa Market, we source directly from cooperatives in these regions, ensuring 
       slug: 'teff-ethiopias-ancient-superfood',
       category: 'Farming Tips',
       excerpt: 'Learn about teff, the tiny grain that powers Ethiopia, and why it is gaining global recognition.',
-      content: `Teff (Eragrostis tef) is a tiny grain — about the size of a poppy seed — that has been cultivated in Ethiopia for thousands of years. It is the foundation of Ethiopian cuisine, most famously used to make injera, the spongy sourdough flatbread that serves as both plate and utensil.
+      content: `Teff (Eragrostis tef) is a tiny grain â€” about the size of a poppy seed â€” that has been cultivated in Ethiopia for thousands of years. It is the foundation of Ethiopian cuisine, most famously used to make injera, the spongy sourdough flatbread that serves as both plate and utensil.
 
 **Nutritional Profile**
 Teff is a nutritional powerhouse. It is naturally gluten-free, high in iron, calcium, and resistant starch. A 100g serving provides approximately 367 calories, 13g protein, 73g carbohydrates, and 8g fiber. Its high iron content makes it particularly valuable in a country where iron deficiency is common.
 
 **Farming Teff**
-Teff is remarkably resilient. It thrives in both waterlogged soils and drought conditions, making it ideal for Ethiopia's variable climate. It grows at altitudes from 1,800 to 2,400 meters and matures in just 60–90 days.
+Teff is remarkably resilient. It thrives in both waterlogged soils and drought conditions, making it ideal for Ethiopia's variable climate. It grows at altitudes from 1,800 to 2,400 meters and matures in just 60â€“90 days.
 
 Key farming tips:
-- Sow teff at the start of the rainy season (June–July in most highland areas)
+- Sow teff at the start of the rainy season (Juneâ€“July in most highland areas)
 - Use minimal tillage to prevent soil erosion
 - Teff requires very little fertilizer compared to other grains
 - Harvest when the grain is fully mature but before heavy rains cause lodging
@@ -576,9 +584,9 @@ At Hafa Market, we source organic teff directly from smallholder farmers in the 
 The Hossana Main Market operates daily but is busiest on Mondays and Thursdays. You will find a wide variety of fresh vegetables, fruits, grains, and spices. Arrive early (before 9am) for the best selection and prices.
 
 **What to Buy and When**
-- **Vegetables**: Tomatoes, onions, cabbage, and potatoes are available year-round. Prices are lowest during harvest season (October–December).
+- **Vegetables**: Tomatoes, onions, cabbage, and potatoes are available year-round. Prices are lowest during harvest season (Octoberâ€“December).
 - **Fruits**: Avocados and mangoes are in season from March to June. Bananas are available year-round.
-- **Grains**: Teff and wheat are most abundant after the main harvest (November–January).
+- **Grains**: Teff and wheat are most abundant after the main harvest (Novemberâ€“January).
 - **Coffee**: Fresh green coffee beans are available from November through February.
 
 **Tips for Getting the Best Deals**
@@ -603,11 +611,11 @@ Hafa Market operates pickup stations at the Main Market Square and near the Bus 
       update: {},
       create: post,
     });
-    console.log(`  ✅ Blog post: ${post.title}`);
+    console.log(`  âœ… Blog post: ${post.title}`);
   }
 
-  // ─── 7. PICKUP STATIONS ──────────────────────────────────────────────────────
-  console.log('📍 Creating pickup stations...');
+  // â”€â”€â”€ 7. PICKUP STATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('ðŸ“ Creating pickup stations...');
   const pickupStations = [
     {
       name: 'Hossana Main Market',
@@ -646,38 +654,39 @@ Hafa Market operates pickup stations at the Main Market Square and near the Bus 
     if (!existing) {
       await prisma.pickupStation.create({ data: station });
     }
-    console.log(`  ✅ Pickup station: ${station.name}`);
+    console.log(`  âœ… Pickup station: ${station.name}`);
   }
 
-  // ─── DONE ─────────────────────────────────────────────────────────────────────
-  console.log('\n🎉 Seed completed successfully!\n');
-  console.log('═══════════════════════════════════════════════════════');
+  // â”€â”€â”€ DONE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('\nðŸŽ‰ Seed completed successfully!\n');
+  console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
   console.log('                  CREDENTIALS SUMMARY                  ');
-  console.log('═══════════════════════════════════════════════════════');
-  console.log('👤 ADMIN / OWNER ACCOUNT');
+  console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
+  console.log('ðŸ‘¤ ADMIN / OWNER ACCOUNT');
   console.log(`   Email    : tilahunmekbib345@gmail.com`);
   console.log(`   Password : Tilahun@2026`);
   console.log(`   Role     : ADMIN`);
   console.log(`   Name     : Tilahun Mekbib`);
-  console.log('───────────────────────────────────────────────────────');
-  console.log('🏪 SELLER PROFILE');
+  console.log('â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
+  console.log('ðŸª SELLER PROFILE');
   console.log(`   Store    : Hafa Market Official Store`);
   console.log(`   Slug     : hafa-official`);
   console.log(`   City     : Hossana, Ethiopia`);
   console.log(`   Status   : VERIFIED`);
-  console.log('───────────────────────────────────────────────────────');
-  console.log('🎟️  PROMO CODES');
+  console.log('â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
+  console.log('ðŸŽŸï¸  PROMO CODES');
   console.log(`   HAFA10    : 10% off, no minimum, max 10,000 uses`);
   console.log(`   WELCOME20 : 20% off first order, min 100 ETB, max 500 uses`);
   console.log(`   COFFEE15  : 15% off coffee, min 200 ETB, max 1,000 uses`);
-  console.log('───────────────────────────────────────────────────────');
-  console.log(`📦 Products seeded : ${productsData.length}`);
-  console.log(`📂 Categories      : ${categoryData.length}`);
-  console.log(`📝 Blog posts      : ${blogPosts.length}`);
-  console.log(`📍 Pickup stations : ${pickupStations.length}`);
-  console.log('═══════════════════════════════════════════════════════\n');
+  console.log('â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
+  console.log(`ðŸ“¦ Products seeded : ${productsData.length}`);
+  console.log(`ðŸ“‚ Categories      : ${categoryData.length}`);
+  console.log(`ðŸ“ Blog posts      : ${blogPosts.length}`);
+  console.log(`ðŸ“ Pickup stations : ${pickupStations.length}`);
+  console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n');
 }
 
 main()
   .catch(console.error)
   .finally(() => prisma.$disconnect());
+
