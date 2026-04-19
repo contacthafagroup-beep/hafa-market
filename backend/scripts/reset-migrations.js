@@ -23,6 +23,7 @@ async function main() {
     await prisma.$executeRawUnsafe(`
       DELETE FROM "_prisma_migrations"
       WHERE "migration_name" IN (
+        '20260417_live_commerce_full',
         '20260417_live_stream_url',
         '20260417_seller_follows',
         '20260418_live_auction_groupbuy',
