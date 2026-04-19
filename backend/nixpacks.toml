@@ -1,0 +1,12 @@
+﻿[phases.setup]
+nixPkgs = ["nodejs_20", "npm-9_x"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["node node_modules/.bin/prisma generate"]
+
+[start]
+cmd = "node node_modules/.bin/prisma migrate deploy && node prisma/seed.js && node src/server.js"
+
