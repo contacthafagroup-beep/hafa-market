@@ -5,7 +5,7 @@ nixPkgs = ["nodejs_20"]
 cmds = ["npm install --legacy-peer-deps"]
 
 [phases.build]
-cmds = ["node node_modules/.bin/prisma generate"]
+cmds = ["node node_modules/prisma/build/index.js generate"]
 
 [start]
-cmd = "node src/server.js"
+cmd = "node node_modules/prisma/build/index.js migrate deploy && node prisma/seed.js && node src/server.js"
