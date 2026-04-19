@@ -8,4 +8,4 @@ cmds = ["npm install --legacy-peer-deps"]
 cmds = ["node node_modules/prisma/build/index.js generate"]
 
 [start]
-cmd = "node node_modules/prisma/build/index.js migrate deploy && node prisma/seed.js && node src/server.js"
+cmd = "node scripts/reset-migrations.js && node node_modules/prisma/build/index.js migrate deploy && node prisma/seed.js && node src/server.js"
