@@ -30,7 +30,8 @@ async function main() {
         '20260418_live_bulk',
         '20260419_social_commerce',
         '20260419_social_posts',
-        '20260420_export_marketplace'
+        '20260420_export_marketplace',
+        '20260421_missing_columns'
       )
     `);
     console.log('✅ Reset dependent migrations for clean re-apply');

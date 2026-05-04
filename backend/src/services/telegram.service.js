@@ -626,6 +626,12 @@ function initTelegramBot(prisma) {
     logger.warn('Telegram bot token not set — bot disabled');
     return null;
   }
+  // In production on Railway, use webhook instead of polling to avoid connection issues
+  // For now, disable polling in production — enable when webhook URL is configured
+  if (process.env.NODE_ENV === 'production' && !process.env.TELEGRAM_WEBHOOK_URL) {
+    logger.info('Telegram bot: polling disabled in production (set TELEGRAM_WEBHOOK_URL to enable)');
+    return null;
+  }
   try {
     const TelegramBot = require('node-telegram-bot-api');
     bot = new TelegramBot(token, { polling: true });
